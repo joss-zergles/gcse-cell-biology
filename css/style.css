@@ -387,3 +387,14 @@ dialog::backdrop { background: rgba(0,0,0,.5); }
 .ruler-tl { position: absolute; top: 72%; transform: translateX(-50%); font-size: calc(var(--u) * 1.35); font-weight: 700; white-space: nowrap; }
 .ruler-mark { position: absolute; top: 22%; transform: translateX(-50%); font-size: calc(var(--u) * 2.4); opacity: .45; transition: opacity .3s, scale .3s; }
 .ruler-mark.on { opacity: 1; scale: 1.35; }
+
+/* step-by-step scene controls */
+.hold { animation: none !important; opacity: 0 !important; visibility: hidden !important; }
+.stage { cursor: pointer; user-select: none; -webkit-user-select: none; }
+.step-bar { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.step-info { flex: 1; font-weight: 800; color: var(--muted); }
+.step-bar #stepNext { font-size: 17px; }
+.step-hint { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+@media (hover: none) { .step-hint { display: none; } }
+#nextScene.ready { animation: nudge 1.4s ease-in-out infinite; box-shadow: 0 0 0 4px rgba(255, 204, 51, .45); }
+@keyframes nudge { 50% { translate: 3px 0; } }

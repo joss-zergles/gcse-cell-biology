@@ -1,5 +1,7 @@
-/* Animated lesson scenes. Each renderer draws into a 16:10 "stage" element and
-   returns an optional cleanup function (used to stop timers / animation frames). */
+/* Animated lesson scenes. Each renderer draws into a 16:10 "stage" element and is
+   driven step by step: elements registered with st.add(el, i) appear at step i, and
+   st.on(fn) handlers run on every step change. Renderers may return a cleanup function
+   (used to stop timers / animation frames). */
 (function () {
   'use strict';
 
@@ -16,7 +18,25 @@
     if (hgt != null) el.style.height = hgt + '%';
     return el;
   }
-  function delay(el, s) { el.style.animationDelay = s + 's'; return el; }
+  // Step controller: reveal elements step by step instead of on a timer.
+  function stepper() {
+    const items = [], handlers = [];
+    let total = 1, cur = -1;
+    return {
+      add(el, i) { items.push([el, i]); total = Math.max(total, i + 1); el.classList.add('hold'); el.style.animationDelay = '0s'; return el; },
+      on(fn) { handlers.push(fn); },
+      setTotal(n) { total = Math.max(1, n); },
+      get count() { return total; },
+      get index() { return cur; },
+      go(i) {
+        i = Math.max(0, Math.min(total - 1, i));
+        const prev = cur;
+        cur = i;
+        items.forEach(([el, k]) => el.classList.toggle('hold', k > i));
+        handlers.forEach((fn) => fn(i, prev));
+      },
+    };
+  }
   const esc = (s) => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -48,7 +68,7 @@
   const S = {};
 
   /* 1. squad — a cell drawn as a pitch, organelles join as players. */
-  S.squad = function (stage, p) {
+  S.squad = function (stage, p, st) {
     const parts = (p.parts || []).slice(0, 8);
     const type = p.cellType || 'animal';
     const cell = place(h('div', 'cell cell-' + type), 3, 7, 50, 86);
@@ -66,16 +86,16 @@
       place(tok, 6 + (c + 0.5) * (41 / cols), top + (r + 0.5) * (span / rows));
       tok.classList.add('centered');
       tok.style.maxWidth = (41 / cols - 1.5) + '%';
-      delay(tok, 0.4 + i * 1.3);
+      st.add(tok, i);
       stage.appendChild(tok);
       const li = h('div', 'squad-item slide-in', `<span>${esc(pt.emoji || '⚽')}</span><div><b>${esc(pt.label)}</b> ${esc(pt.role || '')}</div>`);
-      delay(li, 0.4 + i * 1.3);
+      st.add(li, i);
       list.appendChild(li);
     });
   };
 
   /* 2. versus — head-to-head comparison table. */
-  S.versus = function (stage, p) {
+  S.versus = function (stage, p, st) {
     const L = p.left || {}, R = p.right || {};
     const head = place(h('div', 'vs-head fade'), 2, 3, 96, 18);
     head.innerHTML = `<div class="vs-team"><span>${esc(L.emoji || '🔵')}</span>${esc(L.name)}</div><div class="vs-vs">VS</div><div class="vs-team"><span>${esc(R.emoji || '🔴')}</span>${esc(R.name)}</div>`;
@@ -86,13 +106,13 @@
     const val = (v) => v === true ? '✅' : v === false ? '❌' : esc(v);
     rows.forEach((r, i) => {
       const row = h('div', 'vs-row slide-in', `<div class="vs-l">${val(r.left)}</div><div class="vs-f">${esc(r.feature)}</div><div class="vs-r">${val(r.right)}</div>`);
-      delay(row, 0.8 + i * 1.1);
+      st.add(row, i);
       box.appendChild(row);
     });
   };
 
   /* 3. flow — particles moving across a membrane (diffusion / osmosis / active transport). */
-  S.flow = function (stage, p) {
+  S.flow = function (stage, p, st) {
     const mode = p.mode || 'diffusion';
     const canvas = h('canvas', 'flow-canvas');
     stage.appendChild(canvas);
@@ -105,7 +125,8 @@
     memLabel.textContent = p.membraneLabel || (mode === 'osmosis' ? 'partially permeable membrane' : 'cell membrane');
     stage.appendChild(memLabel);
     const cap = captionStrip(stage, p.captions);
-    cap.show(0);
+    st.setTotal((p.captions || []).length);
+    st.on((i) => cap.show(i));
 
     const parts = [];
     const add = (x, y, emoji, kind, size) => parts.push({ x, y, vx: (Math.random() - 0.5) * 0.004, vy: (Math.random() - 0.5) * 0.004, emoji, kind, size: size || 1, hold: 0 });
@@ -210,16 +231,12 @@
     }
     raf = requestAnimationFrame(draw);
 
-    const t = timers();
-    let ci = 0;
-    if (p.captions && p.captions.length > 1) t.every(4500, () => { ci = (ci + 1) % p.captions.length; cap.show(ci); });
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); t.clear(); };
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   };
 
   /* 4. split — cell division (mitosis) or bacterial binary fission. */
-  S.split = function (stage, p) {
+  S.split = function (stage, p, st) {
     const kind = p.kind === 'binary' ? 'binary' : 'mitosis';
-    const t = timers();
     const cap = captionStrip(stage, p.steps);
     const wrap = place(h('div', 'split-wrap'), 0, 0, 100, 80);
     stage.appendChild(wrap);
@@ -284,20 +301,22 @@
       },
     ];
 
-    let i = 0;
-    states[0](); cap.show(0);
-    const advance = () => {
-      i++;
-      if (i >= states.length) { i = 0; wrap.classList.add('no-trans'); states[0](); void wrap.offsetWidth; wrap.classList.remove('no-trans'); }
-      else states[i]();
+    // states build on each other: jump instantly to the step before, then animate the last one
+    st.setTotal(states.length);
+    st.on((i, prev) => {
+      if (prev === -1 || i !== prev + 1) {
+        wrap.classList.add('no-trans');
+        for (let j = 0; j < Math.max(1, i); j++) states[j]();
+        void wrap.offsetWidth;
+        wrap.classList.remove('no-trans');
+      }
+      if (i > 0) states[i]();
       cap.show(i);
-    };
-    t.every(3200, advance);
-    return () => t.clear();
+    });
   };
 
   /* 5. cycle — stages round a circle with a ball travelling round. */
-  S.cycle = function (stage, p) {
+  S.cycle = function (stage, p, st) {
     const stages = (p.stages || []).slice(0, 6);
     const n = stages.length || 1;
     const ring = place(h('div', 'cycle-ring'), 6, 8, 46, 0);
@@ -315,9 +334,7 @@
     ring.appendChild(ball);
     const detail = place(h('div', 'cycle-detail'), 56, 12, 40, 76);
     stage.appendChild(detail);
-    const t = timers();
-    let i = 0;
-    const show = () => {
+    const show = (i) => {
       nodes.forEach((nd, j) => nd.classList.toggle('on', j === i));
       const ang = -Math.PI / 2 + (i / n) * Math.PI * 2;
       ball.style.left = (50 + 38 * Math.cos(ang)) + '%';
@@ -326,13 +343,12 @@
       detail.classList.remove('flash'); void detail.offsetWidth; detail.classList.add('flash');
       detail.innerHTML = `<div class="cycle-step">Stage ${i + 1} of ${n}</div><h4>${esc(s.label)}</h4><p>${esc(s.detail)}</p>`;
     };
-    show();
-    t.every(4000, () => { i = (i + 1) % n; show(); });
-    return () => t.clear();
+    st.setTotal(n);
+    st.on(show);
   };
 
   /* 6. ladder — orders of magnitude, biggest to smallest. */
-  S.ladder = function (stage, p) {
+  S.ladder = function (stage, p, st) {
     // Two neighbouring items drawn side by side at TRUE relative size, then the view zooms
     // into the smaller one. A powers-of-ten ruler underneath shows where everything sits.
     const items = (p.items || []).filter((x) => x.metres > 0).slice(0, 7).sort((a, b) => b.metres - a.metres);
@@ -361,8 +377,8 @@
     }
     const marks = items.map((it) => { const m = h('div', 'ruler-mark', esc(it.emoji || '⚽')); m.style.left = xOf(it.metres) + '%'; m.title = it.label; ruler.appendChild(m); return m; });
 
-    let i = 0;
-    function showPair() {
+    let zoomTo = null;
+    function showPair(i) {
       t.clear();
       view.innerHTML = '';
       const big = items[i], small = items[i + 1];
@@ -397,23 +413,27 @@
       view.appendChild(cap);
       marks.forEach((m, j) => m.classList.toggle('on', j === i || j === i + 1));
 
-      // zoom into the smaller item, then move on to the next pair
-      t.after(tiny ? 5200 : 4200, () => {
+      // on the next step: zoom into the smaller item before showing the next pair
+      zoomTo = () => {
         group.style.transformOrigin = `${smallX}px ${baseY - Math.max(d, 4) / 2}px`;
         group.style.transform = `scale(${Math.min(D / Math.max(d, 4), 80)})`;
         group.style.opacity = '0';
         cap.style.opacity = '0';
-      });
-      t.after(tiny ? 6600 : 5600, () => { i = (i + 1) % (items.length - 1); showPair(); });
+      };
     }
-    showPair();
-    const onResize = () => showPair();
+    st.setTotal(items.length - 1);
+    st.on((i, prev) => {
+      t.clear();
+      if (i === prev + 1 && prev >= 0 && zoomTo) { zoomTo(); t.after(1400, () => showPair(i)); }
+      else showPair(i);
+    });
+    const onResize = () => showPair(Math.max(0, st.index));
     window.addEventListener('resize', onResize);
     return () => { t.clear(); window.removeEventListener('resize', onResize); };
   };
 
   /* 7. triangle — formula triangle with rearrangements and worked examples. */
-  S.triangle = function (stage, p) {
+  S.triangle = function (stage, p, st) {
     const T = esc(p.top), L = esc(p.left), R = esc(p.right);
     const tri = place(h('div', 'tri'), 3, 6, 40, 86);
     tri.innerHTML = `<svg viewBox="0 0 200 180" class="tri-svg"><polygon points="100,8 192,172 8,172" /><line x1="52" y1="96" x2="148" y2="96"/><line x1="100" y1="96" x2="100" y2="172"/></svg>
@@ -428,20 +448,17 @@
     ].concat((p.examples || []).map(esc));
     lines.forEach((ln, i) => {
       const d = h('div', 'tri-line slide-in' + (i > 2 ? ' ex' : ''), ln);
-      delay(d, 0.6 + i * 1.4);
+      st.add(d, i);
       side.appendChild(d);
     });
     const order = ['tri-top', 'tri-left', 'tri-right'];
-    // highlight each quantity in turn, in step with its rearranged formula
-    const t = timers();
-    const cover = (k) => tri.querySelectorAll('.tri-t').forEach((el) => el.classList.toggle('covered', k >= 0 && el.classList.contains(order[k])));
-    [0, 1, 2].forEach((k) => t.after(600 + k * 1400, () => cover(k)));
-    t.after(600 + 3 * 1400, () => cover(-1));
-    return () => t.clear();
+    // highlight each quantity in step with its rearranged formula
+    const cover = (k) => tri.querySelectorAll('.tri-t').forEach((el) => el.classList.toggle('covered', k >= 0 && k < 3 && el.classList.contains(order[k])));
+    st.on(cover);
   };
 
   /* 8. branch — one thing (e.g. a stem cell) branching into several outcomes. */
-  S.branch = function (stage, p) {
+  S.branch = function (stage, p, st) {
     const outs = (p.outcomes || []).slice(0, 6);
     const c = p.centre || {};
     const svgNS = 'http://www.w3.org/2000/svg';
@@ -461,31 +478,31 @@
       line.setAttribute('x1', cx); line.setAttribute('y1', cy * 0.625 + 6);
       line.setAttribute('x2', x); line.setAttribute('y2', y * 0.625 - 6);
       line.setAttribute('class', 'branch-line');
-      line.style.animationDelay = (0.6 + i * 0.9) + 's';
+      st.add(line, i);
       svg.appendChild(line);
       const tok = h('div', 'token pop centered', `<span class="tok-emoji">${esc(o.emoji || '⚽')}</span><span class="tok-label">${esc(o.label)}</span>${o.note ? `<span class="tok-note">${esc(o.note)}</span>` : ''}`);
       place(tok, x, y);
       tok.style.maxWidth = Math.min(30, (twoRows ? 144 : 72) / Math.max(1, n - 1) - 2) + '%';
-      delay(tok, 1.0 + i * 0.9);
+      st.add(tok, i);
       stage.appendChild(tok);
     });
   };
 
   /* 9. chain — a sequence of steps with arrows (hierarchy, method steps). */
-  S.chain = function (stage, p) {
+  S.chain = function (stage, p, st) {
     const steps = (p.steps || []).slice(0, 8);
     const box = place(h('div', 'chain'), 2, 4, 96, 92);
     stage.appendChild(box);
     steps.forEach((s, i) => {
-      if (i) { const a = h('div', 'chain-arrow fade', '➜'); delay(a, 0.2 + i * 1.1); box.appendChild(a); }
+      if (i) { const a = h('div', 'chain-arrow fade', '➜'); st.add(a, i); box.appendChild(a); }
       const d = h('div', 'chain-step pop', `<span class="tok-emoji">${esc(s.emoji || '⚽')}</span><b>${esc(s.label)}</b>${s.note ? `<small>${esc(s.note)}</small>` : ''}`);
-      delay(d, 0.4 + i * 1.1);
+      st.add(d, i);
       box.appendChild(d);
     });
   };
 
   /* 10. growth — bacteria doubling every generation. */
-  S.growth = function (stage, p) {
+  S.growth = function (stage, p, st) {
     const start = Math.max(1, p.start || 1), div = Math.max(1, p.divisionMinutes || 20);
     const gens = Math.min(10, Math.floor((p.totalMinutes || div * 6) / div));
     const fmt = (n) => n.toLocaleString('en-GB');
@@ -496,18 +513,17 @@
       const n = start * Math.pow(2, g);
       const col = h('div', 'growth-col');
       col.innerHTML = `<span class="growth-n">${fmt(n)}</span><i style="height:${Math.max(2, (n / maxN) * 100)}%"></i><span class="growth-t">${g * div}m</span>`;
-      col.querySelector('i').style.animationDelay = (0.3 + g * 0.5) + 's';
-      col.querySelector('.growth-n').style.animationDelay = (0.3 + g * 0.5) + 's';
+      st.add(col, g); st.add(col.querySelector('i'), g); st.add(col.querySelector('.growth-n'), g);
       chart.appendChild(col);
     }
     const f = place(h('div', 'growth-formula fade'), 3, 80, 94, 18);
     f.innerHTML = `${esc(p.label || 'bacteria')} after ${gens * div} min = ${fmt(start)} × 2<sup>${gens}</sup> = <b>${fmt(maxN)}</b> <small>(${gens} divisions, one every ${div} min)</small>`;
-    delay(f, 0.6 + gens * 0.5);
+    st.add(f, gens + 1);
     stage.appendChild(f);
   };
 
   /* 11. cubes — surface area to volume ratio for cubes of different sizes. */
-  S.cubes = function (stage, p) {
+  S.cubes = function (stage, p, st) {
     const sizes = (p.sizes || [1, 2, 4]).slice(0, 4);
     const unit = esc(p.unit || 'cm');
     const box = place(h('div', 'cubes'), 2, 4, 96, 92);
@@ -520,13 +536,13 @@
       const px = (s / maxS) * 80; // true relative side length
       col.innerHTML = `<div class="cube-wrap"><div class="cube" style="width:${px}%;"></div></div>
         <div class="cube-stats"><b>${s} ${unit} cube</b><span>SA = 6 × ${s}² = ${sa} ${unit}²</span><span>Vol = ${s}³ = ${v} ${unit}³</span><span class="cube-r">SA:V = ${r} : 1</span></div>`;
-      delay(col, 0.4 + i * 1.6);
+      st.add(col, i);
       box.appendChild(col);
     });
   };
 
   /* 12. commentary — bouncing emoji and commentator lines (general purpose). */
-  S.commentary = function (stage, p) {
+  S.commentary = function (stage, p, st) {
     const em = place(h('div', 'comm-emoji'), 0, 6, 100, 30);
     (p.emoji || ['⚽']).slice(0, 6).forEach((e, i) => { const s = h('span', 'bounce', esc(e)); s.style.animationDelay = (i * 0.15) + 's'; em.appendChild(s); });
     stage.appendChild(em);
@@ -534,23 +550,27 @@
     stage.appendChild(box);
     (p.lines || []).slice(0, 5).forEach((ln, i) => {
       const d = h('div', 'comm-line slide-in', '🎙️ ' + esc(ln));
-      delay(d, 0.6 + i * 1.6);
+      st.add(d, i);
       box.appendChild(d);
     });
   };
 
   window.Scenes = {
     types: Object.keys(S),
+    // Draws a scene and returns a controller: { count, index, go(i), cleanup() }
     render(stage, scene) {
       stage.innerHTML = '';
       const fn = S[scene.type] || S.commentary;
+      const st = stepper();
+      let cleanup = null;
       try {
-        return fn(stage, scene.params || {}) || null;
+        cleanup = fn(stage, scene.params || {}, st) || null;
       } catch (e) {
         console.error('Scene failed', scene, e);
         stage.innerHTML = '<div class="st-caption">⚠️ This animation picked up an injury.</div>';
-        return null;
       }
+      st.go(0);
+      return { get count() { return st.count; }, get index() { return st.index; }, go: (i) => st.go(i), cleanup: () => cleanup && cleanup() };
     },
   };
 })();

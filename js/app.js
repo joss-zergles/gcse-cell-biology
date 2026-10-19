@@ -132,22 +132,60 @@
     app.innerHTML = sectionHeader(s, 'lesson') + `
       <article class="scene">
         <div class="scene-top"><h2>${esc(sc.title)}</h2><span class="muted">Scene ${idx + 1} of ${n}</span></div>
-        <div class="stage" id="stage"></div>
+        <div class="stage" id="stage" title="Tap for the next step"></div>
+        <div class="step-bar">
+          <button class="btn ghost small" id="stepBack" aria-label="Previous step">◀</button>
+          <span class="step-info" id="stepInfo"></span>
+          <button class="btn ghost small" id="autoPlay" aria-pressed="false">▶ Auto</button>
+          <button class="btn" id="stepNext">Next step ▶</button>
+        </div>
+        <p class="step-hint">Tap the picture or press → for the next step, ← to go back</p>
         ${sc.commentator ? `<blockquote class="commentator">🎙️ ${esc(sc.commentator)}</blockquote>` : ''}
         <div class="scene-text">${sc.text || ''}</div>
         ${sc.keyFact ? `<div class="keyfact"><b>📝 Exam key fact</b>${sc.keyFact}</div>` : ''}
         <div class="scene-nav">
           ${idx > 0 ? `<a class="btn ghost" href="#/s/${s.id}/${idx - 1}">◀ Back</a>` : '<span></span>'}
           <button class="btn ghost" id="replay">↻ Replay</button>
-          ${idx < n - 1 ? `<a class="btn" href="#/s/${s.id}/${idx + 1}">Next ▶</a>` : `<a class="btn" href="#/s/${s.id}/train">Training ground ⚽</a>`}
+          ${idx < n - 1 ? `<a class="btn" id="nextScene" href="#/s/${s.id}/${idx + 1}">Next scene ▶</a>` : `<a class="btn" id="nextScene" href="#/s/${s.id}/train">Training ground ⚽</a>`}
         </div>
         <div class="dots">${s.scenes.map((_, i) => `<a href="#/s/${s.id}/${i}" class="${i === idx ? 'on' : ''}" aria-label="Scene ${i + 1}"></a>`).join('')}</div>
       </article>`;
-    const stage = $('#stage');
-    const play = () => setCleanup(Scenes.render(stage, sc));
+    const stage = $('#stage'), info = $('#stepInfo'), back = $('#stepBack'), next = $('#stepNext'), auto = $('#autoPlay'), nextScene = $('#nextScene');
+    let ctrl = null, autoTimer = null;
+    const update = () => {
+      const last = ctrl.index >= ctrl.count - 1;
+      info.textContent = `Step ${ctrl.index + 1} of ${ctrl.count}`;
+      back.disabled = ctrl.index <= 0;
+      next.disabled = last;
+      next.classList.toggle('ghost', last);
+      nextScene.classList.toggle('ready', last);
+      if (last) stopAuto();
+    };
+    const stopAuto = () => { clearInterval(autoTimer); autoTimer = null; auto.textContent = '▶ Auto'; auto.setAttribute('aria-pressed', 'false'); };
+    const go = (d) => { ctrl.go(ctrl.index + d); update(); };
+    const play = () => {
+      stopAuto();
+      ctrl = Scenes.render(stage, sc);
+      setCleanup(() => { stopAuto(); ctrl.cleanup(); lessonKeys = null; });
+      lessonKeys = (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      };
+      update();
+    };
     play();
+    stage.addEventListener('click', () => { stopAuto(); go(1); });
+    next.addEventListener('click', () => { stopAuto(); go(1); });
+    back.addEventListener('click', () => { stopAuto(); go(-1); });
+    auto.addEventListener('click', () => {
+      if (autoTimer) return stopAuto();
+      if (ctrl.index >= ctrl.count - 1) play();
+      auto.textContent = '⏸ Pause'; auto.setAttribute('aria-pressed', 'true');
+      autoTimer = setInterval(() => go(1), 4000);
+    });
     $('#replay').addEventListener('click', play);
   }
+  let lessonKeys = null;
 
   /* ---------- training sessions ---------- */
   const SUP = { '⁻': '-', '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9' };
@@ -375,6 +413,7 @@
   document.addEventListener('keydown', (e) => {
     const box = $('#trainer');
     if (box && box._keys && !(e.target instanceof HTMLInputElement)) box._keys(e);
+    else if (lessonKeys && !(e.target instanceof HTMLInputElement) && !e.target.closest('button, a, dialog')) lessonKeys(e);
   });
 
   /* ---------- settings ---------- */
