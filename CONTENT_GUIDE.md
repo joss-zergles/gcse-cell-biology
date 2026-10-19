@@ -93,7 +93,7 @@ Labels inside params appear on a small stage, so keep them **short** (labels ≤
    ```js
    { stages: [ { label: 'Growth', detail: 'what happens in this stage, ≤ 20 words' } ] } // 2–6 stages
    ```
-6. **`ladder`** — orders of magnitude, auto-sorted biggest → smallest, shows ≈10ⁿ m automatically.
+6. **`ladder`** — true-scale size comparison: neighbouring items (auto-sorted biggest → smallest) are drawn side by side at their REAL relative size, then the view zooms into the smaller one; a powers-of-ten ruler shows where every item sits. Ratios and orders of magnitude are calculated automatically.
    ```js
    { items: [ { emoji: '🏟️', label: 'Football pitch', size: '100 m', metres: 100 }, { emoji: '🦠', label: 'Bacterium', size: '1 µm', metres: 1e-6 } ] } // 3–7 items, metres MUST be correct
    ```

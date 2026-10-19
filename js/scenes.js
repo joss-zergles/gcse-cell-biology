@@ -333,18 +333,83 @@
 
   /* 6. ladder — orders of magnitude, biggest to smallest. */
   S.ladder = function (stage, p) {
+    // Two neighbouring items drawn side by side at TRUE relative size, then the view zooms
+    // into the smaller one. A powers-of-ten ruler underneath shows where everything sits.
     const items = (p.items || []).filter((x) => x.metres > 0).slice(0, 7).sort((a, b) => b.metres - a.metres);
+    if (items.length < 2) return null;
     const sup = (n) => String(n).replace(/-/g, '⁻').replace(/\d/g, (d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
-    const box = place(h('div', 'ladder'), 2, 3, 96, 94);
-    stage.appendChild(box);
-    const maxE = Math.log10(items[0] ? items[0].metres : 1), minE = Math.log10(items.length ? items[items.length - 1].metres : 1);
-    items.forEach((it, i) => {
-      const e = Math.round(Math.log10(it.metres));
-      const frac = maxE === minE ? 1 : (Math.log10(it.metres) - minE) / (maxE - minE);
-      const row = h('div', 'ladder-row slide-in', `<span class="ladder-emoji">${esc(it.emoji || '⚽')}</span><span class="ladder-name">${esc(it.label)}</span><span class="ladder-bar"><i style="width:${8 + frac * 92}%"></i></span><span class="ladder-size">${esc(it.size || '')}<small>≈ 10${sup(e)} m</small></span>`);
-      delay(row, 0.4 + i * 1.1);
-      box.appendChild(row);
-    });
+    const UNIT = { 0: '1 m', '-2': '1 cm', '-3': '1 mm', '-6': '1 µm', '-9': '1 nm' };
+    const fmtN = (n) => { const r = Number(n.toPrecision(2)); return r >= 1000 ? r.toLocaleString('en-GB') : String(r); };
+    const t = timers();
+
+    const view = place(h('div', 'zoom-view'), 0, 0, 100, 76);
+    stage.appendChild(view);
+
+    // powers-of-ten ruler
+    const ruler = place(h('div', 'ruler'), 5, 77, 90, 22);
+    stage.appendChild(ruler);
+    const maxE = Math.ceil(Math.log10(items[0].metres)), minE = Math.floor(Math.log10(items[items.length - 1].metres));
+    const span = Math.max(1, maxE - minE);
+    const xOf = (m) => ((maxE - Math.log10(m)) / span) * 100;
+    ruler.innerHTML = '<div class="ruler-title">Powers-of-ten ruler: each tick is 10× smaller than the one before</div><div class="ruler-line"></div>';
+    for (let e = maxE; e >= minE; e--) {
+      const x = ((maxE - e) / span) * 100;
+      const tick = h('div', 'ruler-tick'); tick.style.left = x + '%'; ruler.appendChild(tick);
+      if (UNIT[e] || span <= 8 || (maxE - e) % 2 === 0) {
+        const tl = h('div', 'ruler-tl', UNIT[e] || `10${sup(e)} m`); tl.style.left = x + '%'; ruler.appendChild(tl);
+      }
+    }
+    const marks = items.map((it) => { const m = h('div', 'ruler-mark', esc(it.emoji || '⚽')); m.style.left = xOf(it.metres) + '%'; m.title = it.label; ruler.appendChild(m); return m; });
+
+    let i = 0;
+    function showPair() {
+      t.clear();
+      view.innerHTML = '';
+      const big = items[i], small = items[i + 1];
+      const ratio = big.metres / small.metres;
+      const W = view.clientWidth, H = view.clientHeight;
+      const D = Math.min(H * 0.5, W * 0.38);
+      const d = D / ratio;
+      const tiny = d < 5;
+      const baseY = H * 0.8, bigX = W * 0.3, smallX = bigX + D / 2 + Math.max(d / 2, 6) + W * 0.1;
+      const group = h('div', 'zoom-group');
+      view.appendChild(group);
+      const circle = (cx, dia, it, cls) => {
+        const c = h('div', 'zc ' + cls, dia > 28 ? `<span style="font-size:${Math.min(dia * 0.4, 64)}px">${esc(it.emoji || '⚽')}</span>` : '');
+        Object.assign(c.style, { left: cx + 'px', top: (baseY - Math.max(dia, 4)) + 'px', width: Math.max(dia, 4) + 'px', height: Math.max(dia, 4) + 'px' });
+        group.appendChild(c);
+        const l = h('div', 'zl', `${esc(it.label)}<small>${esc(it.size || '')}</small>`);
+        Object.assign(l.style, { left: cx + 'px', top: (baseY + 4) + 'px' });
+        group.appendChild(l);
+      };
+      circle(bigX, D, big, 'big');
+      circle(smallX, d, small, tiny ? 'small tiny' : 'small');
+      if (tiny) {
+        const arrow = h('div', 'zl tiny-note', '⬇ it\'s this dot!');
+        Object.assign(arrow.style, { left: smallX + 'px', top: (baseY - 34) + 'px' });
+        group.appendChild(arrow);
+      }
+      const oom = Math.log10(ratio);
+      const cap = place(h('div', 'zoom-cap fade'), 3, 3, 94);
+      cap.innerHTML = `<b>${esc(big.label)}</b> (${esc(big.size)}) is about <b class="hl">${fmtN(ratio)} times</b> bigger than <b>${esc(small.label)}</b> (${esc(small.size)})` +
+        ` — ${oom < 1 ? 'less than 1 order' : (Math.round(oom * 10) / 10) + ' orders'} of magnitude.` +
+        (tiny ? ` You could line up ${fmtN(ratio)} of them across it. Drawn to scale, it's just a dot!` : ' Both drawn to scale.');
+      view.appendChild(cap);
+      marks.forEach((m, j) => m.classList.toggle('on', j === i || j === i + 1));
+
+      // zoom into the smaller item, then move on to the next pair
+      t.after(tiny ? 5200 : 4200, () => {
+        group.style.transformOrigin = `${smallX}px ${baseY - Math.max(d, 4) / 2}px`;
+        group.style.transform = `scale(${Math.min(D / Math.max(d, 4), 80)})`;
+        group.style.opacity = '0';
+        cap.style.opacity = '0';
+      });
+      t.after(tiny ? 6600 : 5600, () => { i = (i + 1) % (items.length - 1); showPair(); });
+    }
+    showPair();
+    const onResize = () => showPair();
+    window.addEventListener('resize', onResize);
+    return () => { t.clear(); window.removeEventListener('resize', onResize); };
   };
 
   /* 7. triangle — formula triangle with rearrangements and worked examples. */
@@ -452,7 +517,7 @@
       const sa = 6 * s * s, v = s * s * s, ratio = sa / v;
       const r = Math.round(ratio * 100) / 100;
       const col = h('div', 'cube-col pop');
-      const px = 18 + (s / maxS) * 62;
+      const px = (s / maxS) * 80; // true relative side length
       col.innerHTML = `<div class="cube-wrap"><div class="cube" style="width:${px}%;"></div></div>
         <div class="cube-stats"><b>${s} ${unit} cube</b><span>SA = 6 × ${s}² = ${sa} ${unit}²</span><span>Vol = ${s}³ = ${v} ${unit}³</span><span class="cube-r">SA:V = ${r} : 1</span></div>`;
       delay(col, 0.4 + i * 1.6);
