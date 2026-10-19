@@ -1,0 +1,218 @@
+registerSection({
+  id: '4.1.2.1',
+  title: 'Chromosomes',
+  topic: 'Cell division',
+  emoji: '🧬',
+  biologyOnly: false,
+  intro: 'Every cell is a club with a tactics room, and the playbooks inside always come in matching pairs. Let\'s see who picked the team!',
+  scenes: [
+    {
+      title: 'Zooming into the tactics room',
+      commentator: '"We\'re going straight into the heart of the club, folks, right into the tactics room!"',
+      type: 'chain',
+      params: {
+        steps: [
+          { emoji: '🧠', label: 'Nucleus', note: 'Tactics room — holds the chromosomes' },
+          { emoji: '📋', label: 'Chromosome', note: 'Coiled-up DNA molecule carrying many genes' },
+          { emoji: '🎯', label: 'Gene', note: 'Section of DNA coding for a characteristic' },
+          { emoji: '🧬', label: 'DNA', note: 'The code everything is written in' },
+        ],
+      },
+      text: 'The <b>nucleus</b> of a cell contains <b>chromosomes</b>. Chromosomes are made of long <b>DNA</b> molecules, coiled up tightly. Each chromosome carries a large number of <b>genes</b>, and a <b>gene</b> is a small section of DNA that codes for a particular characteristic or protein.',
+      keyFact: 'Chromosomes are made of DNA molecules, and each chromosome carries a large number of genes.',
+    },
+    {
+      title: 'Picking the squad',
+      commentator: '"Here\'s the full animal cell squad, and the manager has the team sheet in his hand!"',
+      type: 'squad',
+      params: {
+        cellType: 'animal',
+        parts: [
+          { emoji: '🧠', label: 'Nucleus', role: 'the tactics room — contains the chromosomes' },
+          { emoji: '📋', label: 'Chromosomes', role: 'playbooks made of DNA molecules, in pairs in body cells' },
+          { emoji: '🎯', label: 'Genes', role: 'set-piece routines — each chromosome carries a large number' },
+        ],
+      },
+      text: 'In an animal cell, the <b>nucleus</b> contains the <b>chromosomes</b>. Chromosomes are made of DNA and carry a large number of <b>genes</b> each. In body cells, the chromosomes are normally found in <b>pairs</b>.',
+      keyFact: 'In body cells the chromosomes are normally found in pairs, and each chromosome carries a large number of genes.',
+    },
+    {
+      title: 'The pairs count',
+      commentator: '"Forty-six players, and they\'re all in matching pairs! That\'s the full squad sorted!"',
+      type: 'commentary',
+      params: {
+        emoji: ['🎙️', '👯', '🧬', '🎉'],
+        lines: [
+          'In body cells, chromosomes come in pairs.',
+          'Humans have 46 chromosomes in 23 pairs.',
+          'One chromosome in each pair comes from each parent.',
+          'Matching playbooks, one from Mum\'s coaching staff and one from Dad\'s!',
+        ],
+      },
+      text: 'Humans have <b>46 chromosomes</b> in body cells, arranged as <b>23 pairs</b>. The two chromosomes in each pair match, and <b>one chromosome of each pair comes from each parent</b>.',
+      keyFact: 'Human body cells have 46 chromosomes arranged in 23 pairs, with one chromosome of each pair coming from each parent.',
+    },
+    {
+      title: 'Body cell vs sex cell',
+      commentator: '"Two squads, two very different numbers. Let\'s check the line-ups!"',
+      type: 'versus',
+      params: {
+        left: { name: 'Body cell', emoji: '🧍' },
+        right: { name: 'Sex cell (gamete)', emoji: '🥚' },
+        rows: [
+          { feature: 'Chromosomes', left: '46', right: '23' },
+          { feature: 'Found in pairs?', left: true, right: false },
+          { feature: 'Found in', left: 'Most of the body', right: 'Sperm and egg cells' },
+        ],
+      },
+      text: 'Body cells have 46 chromosomes in 23 pairs. <b>Gametes</b> (sex cells — sperm and egg cells) have 23 chromosomes, <b>unpaired</b>, so they carry only one chromosome from each pair.',
+      keyFact: 'Gametes, such as sperm and egg cells, contain 23 unpaired chromosomes, while body cells contain 46 chromosomes in 23 pairs.',
+    },
+    {
+      title: 'Two squads make one full squad',
+      commentator: '"Mum sends 23, Dad sends 23, and together they make a full squad of 46!"',
+      type: 'chain',
+      params: {
+        steps: [
+          { emoji: '🥚', label: 'Egg cell', note: 'Gamete with 23 unpaired chromosomes' },
+          { emoji: '🏃', label: 'Sperm cell', note: 'Gamete with 23 unpaired chromosomes' },
+          { emoji: '💥', label: 'Fertilisation', note: 'The egg and sperm join together' },
+          { emoji: '🧫', label: 'Fertilised cell', note: '46 chromosomes in 23 pairs' },
+        ],
+      },
+      text: 'Gametes contain <b>23 chromosomes</b>, unpaired. At <b>fertilisation</b> the sperm and egg join, so the new cell has 23 chromosomes from each parent — 46 altogether, in 23 pairs.',
+      keyFact: 'At fertilisation, the sperm and egg join, giving a cell with 46 chromosomes arranged in 23 pairs.',
+    },
+    {
+      title: 'Genes calling the shots',
+      commentator: '"Every gene is a set-piece routine, and each one decides a characteristic on the pitch!"',
+      type: 'branch',
+      params: {
+        centre: { emoji: '🎯', label: 'Gene' },
+        outcomes: [
+          { emoji: '👁️', label: 'Eye colour', note: 'Controlled by genes' },
+          { emoji: '🩸', label: 'Blood group', note: 'Controlled by genes' },
+          { emoji: '👂', label: 'Earlobe shape', note: 'Controlled by genes' },
+        ],
+      },
+      text: 'A <b>gene</b> is a small section of DNA that codes for a particular <b>characteristic</b> or protein. Characteristics such as eye colour, blood group and earlobe shape are all controlled by genes.',
+      keyFact: 'A gene is a small section of DNA that codes for a particular characteristic or protein.',
+    },
+  ],
+  cards: [
+    {
+      q: 'What are chromosomes made of?',
+      a: 'DNA molecules',
+      options: ['Starch molecules', 'Cellulose fibres', 'Fat droplets'],
+      accept: ['DNA'],
+      why: 'Chromosomes are the playbooks, and DNA is the ink they are printed in.',
+    },
+    {
+      q: 'Where in the cell are the chromosomes found?',
+      a: 'In the nucleus',
+      options: ['In the cytoplasm', 'In the cell membrane', 'In the mitochondria'],
+      why: 'The nucleus is the tactics room, so that is where the playbooks are kept.',
+    },
+    {
+      q: 'What is a gene?',
+      a: 'A small section of DNA that codes for a particular characteristic or protein',
+      options: [
+        'A whole chromosome copied from a parent',
+        'A pair of chromosomes sitting in the nucleus',
+        'A molecule of protein found in the cytoplasm',
+      ],
+      why: 'A gene is a single set-piece routine, written out in a small stretch of the playbook.',
+    },
+    {
+      q: 'How many genes does each chromosome carry?',
+      a: 'A large number',
+      options: ['Only one', 'Exactly two', 'None at all'],
+      why: 'Each playbook is packed with set-piece routines, so it carries a large number of genes.',
+    },
+    {
+      q: 'DNA is a long molecule. What does it coil up to form?',
+      a: 'A chromosome',
+      options: ['A gene', 'A nucleus', 'A protein'],
+      accept: ['chromosome'],
+      why: 'Long DNA coils up tightly into a chromosome, like a playbook rolled up tight.',
+    },
+    {
+      q: 'How many chromosomes are in a human body cell?',
+      a: '46',
+      options: ['23', '92', '12'],
+      accept: ['46'],
+      why: 'A full squad is 46 players, arranged into 23 matching pairs.',
+    },
+    {
+      q: 'A human body cell has 46 chromosomes. How many pairs is that?',
+      a: '23 pairs',
+      options: ['46 pairs', '12 pairs', '92 pairs'],
+      accept: ['23'],
+      why: 'Every pair is two players, so 46 divided by 2 gives 23 pairs.',
+    },
+    {
+      q: 'Where does one chromosome in each pair come from?',
+      a: 'One from each parent',
+      options: [
+        'Both from the mother',
+        'Both from the father',
+        'Made fresh in the nucleus with no parent',
+      ],
+      why: 'Mum and Dad each send one playbook for every pair, so the squad is a joint effort.',
+    },
+    {
+      q: 'What are gametes?',
+      a: 'Sex cells, such as sperm and egg cells',
+      options: [
+        'Muscle cells with no nucleus',
+        'Cells that store glucose as starch',
+        'Bacteria that divide by binary fission',
+      ],
+      why: 'Gametes are the special sex cells that join together to make a new individual.',
+    },
+    {
+      q: 'How many chromosomes does a human sperm cell contain?',
+      a: '23, unpaired',
+      options: ['46, in pairs', '12, unpaired', '92, in pairs'],
+      accept: ['23'],
+      why: 'A sperm cell is a half-squad, carrying one playbook from each pair.',
+    },
+    {
+      q: 'Why does a child have 46 chromosomes when gametes only have 23?',
+      a: 'One set of 23 from the egg joins one set of 23 from the sperm',
+      options: [
+        'The egg doubles its chromosomes in the womb',
+        'Chromosomes are made fresh in each new cell',
+        'The sperm contributes 46 chromosomes on its own',
+      ],
+      why: 'Two half-squads of 23 combine at fertilisation to make a full squad of 46.',
+    },
+    {
+      q: 'Describe a model that shows the chromosomes in a human body cell.',
+      a: 'A diagram of 23 matching pairs inside the nucleus',
+      options: [
+        'One long unpaired chromosome in the membrane',
+        'A diagram of 46 unpaired chromosomes in the cytoplasm',
+        'A diagram of 12 pairs in the mitochondria',
+      ],
+      why: 'Drawing the pairs inside the nucleus is the best way to show how the squad is arranged.',
+    },
+    {
+      q: 'What does a gene code for?',
+      a: 'A particular characteristic or protein',
+      options: [
+        'The nucleus of the cell',
+        'The number of chromosomes in a gamete',
+        'The shape of the cell membrane only',
+      ],
+      why: 'Genes are the instructions for the characteristics and proteins a cell makes.',
+    },
+    {
+      q: 'A gene is a small section of which molecule?',
+      a: 'DNA',
+      options: ['Starch', 'Glucose', 'Cellulose'],
+      accept: ['DNA'],
+      why: 'Each gene is a short stretch of the DNA ink, written out as one routine.',
+    },
+  ],
+});
