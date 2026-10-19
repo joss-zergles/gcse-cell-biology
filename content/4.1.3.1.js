@@ -7,6 +7,22 @@ registerSection({
   intro: 'Diffusion is the fans spilling out of a packed away end into the empty stands. No turnstile, no pushing, no energy needed.',
   scenes: [
     {
+      title: 'Crowded and empty',
+      commentator: '"Welcome to the stadium! Everything is made of tiny particles, and they are always moving about at random!"',
+      type: 'commentary',
+      params: {
+        emoji: ['⚽', '🏟️', '🎉'],
+        lines: [
+          '"Everything around you is made of tiny particles, and they are always moving about at random!"',
+          '"Concentration tells you how crowded those particles are. Packed tight is high concentration, spread thin is low concentration!"',
+          '"The difference between the packed end and the empty end is the concentration gradient. The bigger the gap, the steeper the gradient!"',
+          '"And when a substance dissolves in a liquid like water, you get a solution. Now let\'s watch the fans move!"',
+        ],
+      },
+      text: 'Everything is made of tiny <b>particles</b>, such as molecules, and they are always moving about at random. <b>Concentration</b> is how many particles of a substance are packed into a space: crowded means <b>high concentration</b> and sparse means <b>low concentration</b>. The <b>concentration gradient</b> is the difference in concentration between two areas, so the bigger the difference, the steeper the gradient. A <b>solution</b> is a substance dissolved in a liquid, such as sugar dissolved in water.',
+      keyFact: 'A concentration gradient is the difference in concentration between two areas, and a solution is a substance dissolved in a liquid such as water.',
+    },
+    {
       title: 'Fans spilling out of the packed end',
       commentator: '"Look at that packed away end! They are pouring out into the empty stands, and nobody has to push them!"',
       type: 'flow',
@@ -19,12 +35,35 @@ registerSection({
         membraneLabel: 'cell membrane',
         captions: [
           'Packed together on the high concentration side',
-          'Particles spread out through the membrane pores',
+          'Particles move both ways, but more leave the crowded side',
           'Net movement: from high to low concentration',
         ],
       },
-      text: 'Diffusion is the spreading out of particles of any substance in solution, or particles of a gas. It causes a <b>net movement</b> from an area of <b>higher concentration</b> to an area of <b>lower concentration</b>. Oxygen moves into cells this way, and no energy is needed.',
+      text: 'Diffusion is the spreading out of particles from a higher concentration to a lower concentration, in solutions and in gases. Particles move in both directions all the time, but more move from the crowded side than the other way. This overall movement, from high to low concentration, is the <b>net movement</b>. Oxygen moves into cells this way, and no energy is needed.',
       keyFact: 'Diffusion is the net movement of particles from an area of higher concentration to an area of lower concentration.',
+    },
+    {
+      title: 'Skin and space',
+      commentator: '"Every object has a skin, and it has space inside it too! Let us measure both!"',
+      type: 'commentary',
+      params: {
+        emoji: ['🧊', '📦', '➗'],
+        lines: [
+          '"Every object has a skin: its surface area is the total area of all its outside faces!"',
+          '"Inside, the object takes up space. That space is its volume!"',
+          '"Divide the surface area by the volume and you get the surface area to volume ratio, or SA:V ratio for short!"',
+        ],
+      },
+      text: '<b>Surface area</b> is the total area of all the outside faces of an object, like its skin. <b>Volume</b> is how much space the object takes up inside. The <b>SA:V ratio</b> is the surface area divided by the volume, so a bigger ratio means more skin for each unit of space inside.',
+      keyFact: 'The surface area to volume ratio is found by dividing the surface area by the volume.',
+    },
+    {
+      title: 'Cubes: who gets the most exits?',
+      commentator: '"Small cube, loads of exits for its size! The big one is all middle and no edges!"',
+      type: 'cubes',
+      params: { sizes: [1, 2, 4], unit: 'cm' },
+      text: 'For a cube, surface area = 6 × side<sup>2</sup> and volume = side<sup>3</sup>, so the SA:V ratio is surface area ÷ volume. The 1 cm cube gives 6:1, the 2 cm cube gives 3:1 and the 4 cm cube gives 1.5:1, so bigger cubes have a <b>smaller</b> ratio.',
+      keyFact: 'As an object gets bigger, its surface area to volume ratio gets smaller.',
     },
     {
       title: 'Three ways to speed up the fans',
@@ -32,21 +71,13 @@ registerSection({
       type: 'chain',
       params: {
         steps: [
-          { emoji: '📈', label: 'Steeper gradient', note: 'more crowded end means faster spreading' },
-          { emoji: '🔥', label: 'Higher temperature', note: 'particles have more energy and move faster' },
+          { emoji: '📈', label: 'Steeper gradient', note: 'bigger gap between crowded and empty ends' },
+          { emoji: '🔥', label: 'Higher temperature', note: 'particles move faster when hotter' },
           { emoji: '🚪', label: 'Bigger surface area', note: 'more exits, so more particles cross at once' },
         ],
       },
-      text: 'The rate of diffusion increases when the <b>concentration gradient</b> is steeper, when the <b>temperature</b> is higher, and when the <b>surface area</b> of the membrane is larger. A bigger difference in concentration means particles move down the gradient faster.',
+      text: 'The <b>rate of diffusion</b> (how fast it happens) increases when the <b>concentration gradient</b> is steeper, when the <b>temperature</b> is higher, and when the <b>surface area</b> of the membrane is larger. A bigger difference in concentration means more particles move from the crowded end to the empty end each second.',
       keyFact: 'The rate of diffusion increases with a steeper concentration gradient, a higher temperature and a larger surface area of the membrane.',
-    },
-    {
-      title: 'Cubes: who gets the most exits?',
-      commentator: '"Small cube, loads of exits for its size! The big one is all middle and no edges!"',
-      type: 'cubes',
-      params: { sizes: [1, 2, 4], unit: 'cm' },
-      text: 'For a cube, surface area = 6 × side<sup>2</sup> and volume = side<sup>3</sup>. The surface area to volume ratio is found by dividing surface area by volume. The 1 cm cube gives 6:1, the 2 cm cube gives 3:1 and the 4 cm cube gives 1.5:1, so bigger cubes have a <b>smaller</b> ratio.',
-      keyFact: 'As an object gets bigger, its surface area to volume ratio gets smaller.',
     },
     {
       title: 'Exchange surfaces in the squad',
@@ -57,12 +88,12 @@ registerSection({
         outcomes: [
           { emoji: '🫁', label: 'Lungs (alveoli)', note: 'Huge SA, thin walls, blood supply' },
           { emoji: '🍽️', label: 'Small intestine', note: 'Villi: huge SA, thin walls' },
-          { emoji: '🐟', label: 'Fish gills', note: 'Many lamellae, thin, good blood supply' },
+          { emoji: '🐟', label: 'Fish gills', note: 'Many thin filaments, good blood supply' },
           { emoji: '🌱', label: 'Plant roots', note: 'Root hairs: more SA for water' },
           { emoji: '🍃', label: 'Leaves', note: 'Flat, thin, many stomata for gas exchange' },
         ],
       },
-      text: 'Multicellular organisms need <b>specialised exchange surfaces</b> so enough molecules can get in and out. Lungs have millions of alveoli for oxygen in and carbon dioxide out. The small intestine has villi to absorb digested food. Fish gills take oxygen from water. Root hair cells absorb water and mineral ions, and leaves use stomata for gas exchange.',
+      text: 'An <b>exchange surface</b> is a part of an organism specialised for getting substances in and out. Lungs have millions of <b>alveoli</b>, tiny air sacs where <b>gas exchange</b> happens: oxygen goes in and carbon dioxide (a waste gas from respiration) goes out. The small intestine has <b>villi</b>, tiny finger-like folds that absorb digested food. Fish <b>gills</b> are feathery organs with many thin filaments that take oxygen from water, while leaves have <b>stomata</b>, tiny holes on the underside that let gases in and out. <b>Ventilation</b> means breathing in and out (or water flowing over gills) to bring fresh supplies.',
       keyFact: 'Lungs, villi, gills, root hairs and leaves all have a large surface area and a thin structure to speed up exchange.',
     },
     {
@@ -72,12 +103,12 @@ registerSection({
       params: {
         steps: [
           { emoji: '📏', label: 'Large surface area', note: 'more membrane for molecules to cross' },
-          { emoji: '🧻', label: 'Thin membrane', note: 'short diffusion path' },
-          { emoji: '🩸', label: 'Blood supply', note: 'animals: keeps the gradient steep' },
-          { emoji: '💨', label: 'Ventilation', note: 'animals: brings fresh air, keeps gradient steep' },
+          { emoji: '🧻', label: 'Thin membrane', note: 'short diffusion path, so faster crossing' },
+          { emoji: '🩸', label: 'Blood supply', note: 'carries substances away, keeps the gradient steep' },
+          { emoji: '💨', label: 'Ventilation', note: 'brings fresh supplies, keeps the gradient steep' },
         ],
       },
-      text: 'An effective exchange surface has a <b>large surface area</b> and a <b>thin membrane</b> to give a short diffusion path. In animals it also has an <b>efficient blood supply</b> and, for gas exchange, is <b>ventilated</b>. Together these keep a steep concentration gradient, so diffusion stays fast.',
+      text: 'An effective exchange surface has a <b>large surface area</b> and a <b>thin membrane</b>, giving a short <b>diffusion path</b> (the distance particles travel to cross). In animals, an <b>efficient blood supply</b> keeps carrying substances away from the surface, and for gas exchange the surface is <b>ventilated</b> so fresh supplies keep arriving. Both keep the <b>concentration gradient</b> steep, so diffusion stays fast. Urea is a waste made when the body breaks down extra protein: it diffuses into the <b>blood plasma</b> (the liquid part of the blood), and the kidneys filter it out. Getting rid of waste made by the body like this is called <b>excretion</b>.',
       keyFact: 'An effective exchange surface has a large surface area, a thin membrane, and in animals an efficient blood supply and (for gas exchange) ventilation.',
     },
     {
@@ -102,9 +133,9 @@ registerSection({
       q: 'What is diffusion?',
       a: 'Net movement of particles from higher to lower concentration',
       options: [
-        'Movement of water across a partially permeable membrane',
         'Movement of particles from lower to higher concentration',
-        'Using energy to pump particles against a gradient',
+        'Pumping particles against a gradient using energy',
+        'Cells splitting to make two identical cells',
       ],
       why: 'Fans spill out of the packed end into the empty stands, and no energy is needed.',
     },
@@ -112,7 +143,7 @@ registerSection({
       q: 'Diffusion happens in solutions and in which other form of matter?',
       a: 'Gases',
       accept: ['gas'],
-      options: ['Only animal cells', 'Only plant cells', 'Metal wires'],
+      options: ['Solid metal', 'Only plant cells', 'Only animal cells'],
       why: 'Gas particles are always bouncing about, so they spread out too.',
     },
     {
@@ -123,10 +154,10 @@ registerSection({
       why: 'Oxygen goes into the blood, while carbon dioxide travels the other way.',
     },
     {
-      q: 'Which waste product moves from cells into the blood plasma to be removed by the kidney?',
+      q: 'Which waste product moves from cells into the blood plasma to be removed by the kidneys?',
       a: 'Urea',
       accept: ['urea'],
-      options: ['Glucose', 'Oxygen', 'Starch'],
+      options: ['Glucose', 'Oxygen', 'Chlorophyll'],
       why: 'Urea is the waste that the kidneys filter out of the blood.',
     },
     {
@@ -201,11 +232,11 @@ registerSection({
       why: 'The 2 cm cube has 24 cm² to 8 cm³, so 3:1. The 4 cm cube has 96 cm² to 64 cm³, so 1.5:1.',
     },
     {
-      q: 'What are the tiny air sacs in the lungs called, where gas exchange happens?',
-      a: 'Alveoli',
-      accept: ['alveoli'],
-      options: ['Bronchioles', 'Trachea', 'Villi'],
-      why: 'Millions of alveoli give the lungs a huge surface area.',
+      q: 'What is the name for getting rid of waste made by the body?',
+      a: 'Excretion',
+      accept: ['excretion'],
+      options: ['Ventilation', 'Diffusion', 'Photosynthesis'],
+      why: 'The kidneys remove urea from the blood, which is one example of excretion.',
     },
     {
       q: 'What do the villi in the small intestine increase?',
@@ -218,14 +249,14 @@ registerSection({
       why: 'Lots of little fingers on the lining means more area to soak up food.',
     },
     {
-      q: 'Fish gills have many thin filaments and lamellae. What is this for?',
+      q: 'Fish gills have many thin filaments. What is this for?',
       a: 'A large surface area for gas exchange with the water',
       options: [
         'To make the fish lighter in the water',
         'To stop water flowing over the gills',
         'To produce digestive enzymes',
       ],
-      why: 'The more lamellae the fish has, the more oxygen it can grab from the water.',
+      why: 'The more filaments a fish has, the more oxygen it can take from the water.',
     },
     {
       q: 'What feature of root hair cells helps them absorb water and mineral ions quickly?',

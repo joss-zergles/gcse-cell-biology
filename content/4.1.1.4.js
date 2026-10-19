@@ -7,8 +7,22 @@ registerSection({
   intro: 'Every cell is a player with a shirt number. Most animal players pick their position early and stick to it for life, but plant players can retrain all career long. Time to see who does what!',
   scenes: [
     {
+      title: 'Kick-off: from one cell to a squad',
+      commentator: '"Every great team starts with a single cell! Watch the squad grow from one player into a whole organism."',
+      type: 'chain',
+      params: {
+        steps: [
+          { emoji: '🥚', label: 'Fertilised egg', note: 'One cell, just after fertilisation' },
+          { emoji: '⚪', label: 'Embryo', note: 'Very early stage: a small ball of cells' },
+          { emoji: '🧑', label: 'Mature organism', note: 'Fully grown' },
+        ],
+      },
+      text: 'A fertilised egg is just one cell. It keeps splitting in two, a process called <b>cell division</b> (more on this in Mitosis and the cell cycle). An <b>embryo</b> is the very early stage of a developing animal or plant, just after fertilisation: a small ball of cells. An organism made of many cells is <b>multicellular</b>. Once it is fully grown it is <b>mature</b>.',
+      keyFact: 'An embryo is the very early stage of a developing animal or plant, a small ball of cells just after fertilisation.',
+    },
+    {
       title: 'Youth academy: picking a position',
-      commentator: '"Every kid in the academy starts out as an unspecialised cell, and the coaches are about to decide where each one plays!"',
+      commentator: '"Every kid in the academy starts out with no position at all. The coaches are about to decide where each one plays!"',
       type: 'branch',
       params: {
         centre: { emoji: '🌱', label: 'Unspecialised cell' },
@@ -19,7 +33,7 @@ registerSection({
           { emoji: '🩸', label: 'Red blood cell', note: 'Carries oxygen around the body' },
         ],
       },
-      text: 'Cell <b>differentiation</b> is the process where a cell changes to become <b>specialised</b> for a particular job. Each new type of cell has the sub-cellular structures it needs for its own function.',
+      text: 'An <b>unspecialised cell</b> is a cell that hasn\'t got a particular job yet. As an organism develops, a cell <b>differentiates</b>: it changes to become <b>specialised</b> for one particular job, such as carrying messages or carrying oxygen.',
       keyFact: 'Cell differentiation is the process by which a cell changes to become specialised for a particular function.',
     },
     {
@@ -34,23 +48,23 @@ registerSection({
           { emoji: '🏊', label: 'Sperm cell', note: 'Specialised for one job' },
         ],
       },
-      text: 'As a cell differentiates, it acquires different <b>sub-cellular structures</b> that let it carry out a particular function. It has become a <b>specialised cell</b>. A sperm cell grows a tail to swim and has lots of mitochondria to release the energy the tail needs.',
+      text: 'As a cell differentiates, it gains different <b>sub-cellular structures</b> that let it carry out its particular function. A sperm cell grows a tail to swim, and it has lots of <b>mitochondria</b>. Mitochondria release the energy the tail needs by <b>aerobic respiration</b>.',
       keyFact: 'As a cell differentiates it acquires different sub-cellular structures, so it can carry out a particular function and become a specialised cell.',
     },
     {
-      title: 'Inside the sperm cell squad',
-      commentator: '"Three key players on the pitch, and every single one has a job to do!"',
-      type: 'squad',
+      title: 'Why the team needs different players',
+      commentator: '"A multicellular team has loads of jobs to do at once. One type of player simply can\'t do them all!"',
+      type: 'commentary',
       params: {
-        cellType: 'animal',
-        parts: [
-          { emoji: '🧠', label: 'Nucleus', role: 'the manager, carrying the genetic material that controls the cell' },
-          { emoji: '🏃', label: 'Tail', role: 'lets the sperm cell swim to the egg' },
-          { emoji: '🔋', label: 'Mitochondria', role: 'release energy by aerobic respiration to power the tail' },
+        emoji: ['🩸', '🧠', '💪'],
+        lines: [
+          '"A multicellular organism has to carry oxygen, send messages and move, all at the same time."',
+          '"One type of cell can\'t do every job well, so cells differentiate and specialise."',
+          '"Specialised cells team up in tissues and organs, and that is how the whole squad wins!"',
         ],
       },
-      text: 'A specialised cell has <b>sub-cellular structures</b> that enable it to carry out its particular function. Each structure has its own role, and together they make the cell efficient at one job.',
-      keyFact: 'A specialised cell has sub-cellular structures that enable it to carry out its particular function.',
+      text: 'A <b>multicellular</b> organism has lots of different jobs to do, such as carrying oxygen, sending messages and moving. One type of cell cannot do all of these well, so cells differentiate and become specialised. Specialised cells then work together in <b>tissues</b> and <b>organs</b>.',
+      keyFact: 'Cell differentiation is important because specialised cells can each do one job well, and work together in tissues and organs.',
     },
     {
       title: 'Animals vs plants: who keeps retraining?',
@@ -65,12 +79,12 @@ registerSection({
           { feature: 'Form specialised cells', left: true, right: true },
         ],
       },
-      text: 'Most types of animal cell differentiate at an early stage of development. Many types of plant cell keep the ability to differentiate throughout life.',
+      text: 'Most types of animal cell differentiate at an early stage of development, as the embryo grows. Many types of plant cell keep the ability to differentiate throughout life.',
       keyFact: 'Most types of animal cell differentiate at an early stage, but many types of plant cell retain the ability to differentiate throughout life.',
     },
     {
       title: 'Veterans: only signing replacements',
-      commentator: '"The veteran animal squad isn\'t signing players for fun any more. Only the injured and the retired get replaced!"',
+      commentator: '"The veteran animal squad isn\'t signing players for fun any more. Only the injured and the worn-out get replaced!"',
       type: 'commentary',
       params: {
         emoji: ['🧓', '🩹', '🔁'],
@@ -80,7 +94,7 @@ registerSection({
           '"Repair and replacement, that is the only transfer business going on!"',
         ],
       },
-      text: 'In mature animals, cell division is mainly restricted to <b>repair and replacement</b>. Damaged or worn-out cells are replaced, and wounds are repaired by making new cells.',
+      text: 'In a mature animal, cell division is mainly restricted to <b>repair and replacement</b>. <b>Repair</b> means making new cells to heal a wound, such as a cut. <b>Replacement</b> means swapping worn-out cells for new ones, for example skin cells and red blood cells.',
       keyFact: 'In mature animals, cell division is mainly restricted to repair and replacement of cells.',
     },
   ],
@@ -92,17 +106,42 @@ registerSection({
       why: 'Like an academy kid settling into one position for the rest of his career.',
     },
     {
+      q: 'What is an embryo?',
+      a: 'A very early stage of development: a small ball of cells just after fertilisation',
+      options: ['A fully grown adult animal or plant', 'A single cell that has been damaged', 'A specialised cell with a long tail'],
+      why: 'Like the squad at the very start, before anyone has been given a shirt.',
+    },
+    {
+      q: 'What does it mean if an organism is multicellular?',
+      a: 'It is made of many cells',
+      options: ['It is made of only one cell', 'It can only survive in water', 'It has no sub-cellular structures'],
+      why: 'A full team of players on the pitch, not one lonely striker.',
+    },
+    {
+      q: 'What does mature mean for an animal or plant?',
+      a: 'Fully grown',
+      options: ['Just starting to develop', 'Made of only one cell', 'Freshly fertilised and not yet split'],
+      accept: ['grown'],
+      why: 'A mature player has finished growing and is a full member of the squad.',
+    },
+    {
+      q: 'What do we call a cell that has not yet differentiated?',
+      a: 'An unspecialised cell',
+      options: ['A specialised cell', 'A dead cell', 'A bacterial cell'],
+      accept: ['unspecialised'],
+      why: 'Like a youth player with no position yet, because the coaches haven\'t decided.',
+    },
+    {
       q: 'Why do multicellular organisms need differentiated cells?',
       a: 'So specialised cells can work efficiently and form tissues and organs',
       options: ['So every cell can do every job in the body', 'So cells never need to divide again', 'So the organism never needs to eat'],
       why: 'A team of nine strikers and no defenders gets nowhere, so every player needs a job.',
     },
     {
-      q: 'What do we call a cell that has differentiated to do one particular job?',
-      a: 'A specialised cell',
-      options: ['An unspecialised cell', 'A dead cell', 'A bacterial cell'],
-      accept: ['specialised'],
-      why: 'It is a player who has been given one position and trained for it.',
+      q: 'Why can one type of cell not do every job in a multicellular organism well?',
+      a: 'Different jobs need different structures, so cells specialise',
+      options: ['Every cell has exactly the same structures', 'Jobs like carrying oxygen need no special structures', 'Cells that do one job never work with other cells'],
+      why: 'A goalkeeper and a striker need different kit and different training.',
     },
     {
       q: 'When do most types of animal cell differentiate?',
@@ -117,16 +156,9 @@ registerSection({
       why: 'Plant players can retrain for a brand new position all career long.',
     },
     {
-      q: 'In a mature animal, what is cell division mainly restricted to?',
-      a: 'Repair and replacement of cells',
-      options: ['Growing the animal to a much bigger size', 'Making the cell wall thicker', 'Storing energy as starch'],
-      accept: ['repair'],
-      why: 'Like signing a new player only to cover an injury or a retirement.',
-    },
-    {
       q: 'How does a cell become specialised as it differentiates?',
       a: 'It acquires different sub-cellular structures that let it carry out a particular function',
-      options: ['It loses its nucleus and all its organelles', 'It gets bigger and splits in two', 'It stops making proteins for good'],
+      options: ['It loses all its sub-cellular structures', 'It gets bigger and splits in two', 'It stops making proteins for good'],
       why: 'Like a player who gets the right boots and kit for their position.',
     },
     {
@@ -139,7 +171,7 @@ registerSection({
     {
       q: 'Why does a sperm cell contain lots of mitochondria?',
       a: 'To release lots of energy by aerobic respiration to power its tail',
-      options: ['To make its cell wall stronger', 'To store lots of starch for the egg', 'To carry out photosynthesis'],
+      options: ['To make its cell wall stronger', 'To make its nucleus bigger', 'To carry out photosynthesis'],
       why: 'Mitochondria are the energy engine room, like a midfielder who never stops running.',
     },
     {
@@ -156,11 +188,23 @@ registerSection({
       why: 'One defender is just a player, but a defensive line is a unit that works as one.',
     },
     {
-      q: 'What do we call a cell that has not yet differentiated?',
-      a: 'An unspecialised cell',
-      options: ['A specialised cell', 'A dead cell', 'A bacterial cell'],
-      accept: ['unspecialised'],
-      why: 'Like a youth player with no position yet, because the coaches haven\'t decided.',
+      q: 'What is cell division?',
+      a: 'A cell splitting in two to make new cells',
+      options: ['A cell joining with another cell to make one', 'A cell losing its nucleus', 'A cell swapping substances across its membrane'],
+      why: 'Like one player turning into two, which is covered properly in Mitosis and the cell cycle.',
+    },
+    {
+      q: 'In a mature animal, what does repair involve?',
+      a: 'Making new cells to heal a wound, such as a cut',
+      options: ['Making the animal grow to a much bigger size', 'Making the cell wall thicker', 'Storing energy as glycogen'],
+      why: 'Like a defender coming back on after an injury to plug the gap.',
+    },
+    {
+      q: 'Give one example of cells that are replaced in a mature animal.',
+      a: 'Skin cells or red blood cells',
+      options: ['Cell walls made of cellulose', 'Permanent vacuoles full of cell sap', 'Chloroplasts in animal skin'],
+      accept: ['skin', 'red blood'],
+      why: 'Like signing a fresh player when a worn-out one can no longer last the season.',
     },
   ],
 });

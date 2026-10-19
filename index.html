@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
   <header class="topbar">
@@ -37,24 +37,28 @@
     </form>
   </dialog>
 
+  <div class="term-pop" id="termPop" role="dialog" aria-live="polite" hidden><button class="term-close" aria-label="Close">✕</button><div id="termBody"></div></div>
+
   <script>
     window.CELLBIO_SECTIONS = [];
     function registerSection(s) { window.CELLBIO_SECTIONS.push(s); }
+    function registerGlossary(g) { window.CELLBIO_GLOSSARY = g; }
   </script>
-  <script src="content/4.1.1.1.js?v=3"></script>
-  <script src="content/4.1.1.2.js?v=3"></script>
-  <script src="content/4.1.1.3.js?v=3"></script>
-  <script src="content/4.1.1.4.js?v=3"></script>
-  <script src="content/4.1.1.5.js?v=3"></script>
-  <script src="content/4.1.1.6.js?v=3"></script>
-  <script src="content/4.1.2.1.js?v=3"></script>
-  <script src="content/4.1.2.2.js?v=3"></script>
-  <script src="content/4.1.2.3.js?v=3"></script>
-  <script src="content/4.1.3.1.js?v=3"></script>
-  <script src="content/4.1.3.2.js?v=3"></script>
-  <script src="content/4.1.3.3.js?v=3"></script>
-  <script src="js/scenes.js?v=3"></script>
-  <script src="js/srs.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="content/4.1.1.1.js?v=4"></script>
+  <script src="content/4.1.1.2.js?v=4"></script>
+  <script src="content/4.1.1.3.js?v=4"></script>
+  <script src="content/4.1.1.4.js?v=4"></script>
+  <script src="content/4.1.1.5.js?v=4"></script>
+  <script src="content/4.1.1.6.js?v=4"></script>
+  <script src="content/4.1.2.1.js?v=4"></script>
+  <script src="content/4.1.2.2.js?v=4"></script>
+  <script src="content/4.1.2.3.js?v=4"></script>
+  <script src="content/4.1.3.1.js?v=4"></script>
+  <script src="content/4.1.3.2.js?v=4"></script>
+  <script src="content/4.1.3.3.js?v=4"></script>
+  <script src="content/glossary.js?v=4"></script>
+  <script src="js/scenes.js?v=4"></script>
+  <script src="js/srs.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

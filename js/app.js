@@ -11,8 +11,64 @@
   const numKey = (id) => id.split('.').map((n) => n.padStart(3, '0')).join('.');
   const sections = window.CELLBIO_SECTIONS.slice().sort((a, b) => numKey(a.id) < numKey(b.id) ? -1 : 1);
   const byId = Object.fromEntries(sections.map((s) => [s.id, s]));
-  const cardIds = (s) => s.cards.map((_, i) => s.id + '#' + i);
-  const cardById = (cid) => { const [sid, i] = cid.split('#'); const s = byId[sid]; return s && s.cards[+i] ? { s, c: s.cards[+i] } : null; };
+  // Card ids come from the question text, so editing/reordering a section's cards keeps progress on the others.
+  const hash = (str) => { let x = 5381; for (let i = 0; i < str.length; i++) x = ((x << 5) + x + str.charCodeAt(i)) >>> 0; return x.toString(36); };
+  const cardIndex = {};
+  sections.forEach((s) => s.cards.forEach((c) => { c._id = s.id + '#' + hash(c.q); cardIndex[c._id] = { s, c }; }));
+  const cardIds = (s) => s.cards.map((c) => c._id);
+  const cardById = (cid) => cardIndex[cid] || null;
+
+  /* ---------- tap-to-define glossary ---------- */
+  const GLOSSARY = (window.CELLBIO_GLOSSARY || []).filter((g) => g.term && g.def && g.term !== 'cell');
+  const termByForm = {};
+  GLOSSARY.forEach((g) => [g.term].concat(g.forms || []).forEach((f) => { termByForm[f.toLowerCase()] = g; }));
+  const reEsc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const forms = Object.keys(termByForm).sort((a, b) => b.length - a.length);
+  const termRe = forms.length ? new RegExp(`(?<![\\w-])(${forms.map(reEsc).join('|')})(?![\\w-])`, 'gi') : null;
+  // Wrap the first mention of each glossary term in `html` with a tappable button. `seen` is shared
+  // across the pieces of one screen so each word is only marked once.
+  function linkTerms(html, seen) {
+    if (!termRe || !html) return html || '';
+    const tpl = document.createElement('template');
+    tpl.innerHTML = html;
+    const walker = document.createTreeWalker(tpl.content, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      const text = node.nodeValue;
+      termRe.lastIndex = 0;
+      let m, last = 0, frag = null;
+      while ((m = termRe.exec(text))) {
+        const g = termByForm[m[1].toLowerCase()];
+        if (!g || seen.has(g.term)) continue;
+        seen.add(g.term);
+        frag = frag || document.createDocumentFragment();
+        frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'term'; b.dataset.term = g.term; b.textContent = m[1];
+        frag.appendChild(b);
+        last = m.index + m[1].length;
+      }
+      if (frag) { frag.appendChild(document.createTextNode(text.slice(last))); node.replaceWith(frag); }
+    });
+    return tpl.innerHTML;
+  }
+  const pop = document.getElementById('termPop');
+  const glossaryByTerm = Object.fromEntries(GLOSSARY.map((g) => [g.term, g]));
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.term');
+    if (b) {
+      e.stopPropagation();
+      const g = glossaryByTerm[b.dataset.term];
+      const from = byId[g.section];
+      const word = b.textContent;
+      document.getElementById('termBody').innerHTML = `<b>📖 ${esc(word.charAt(0).toUpperCase() + word.slice(1))}</b><p>${esc(g.def)}</p>` +
+        (from ? `<small>Taught in ${g.section} ${esc(from.title)}</small>` : '');
+      pop.hidden = false;
+      return;
+    }
+    if (!e.target.closest('#termPop') || e.target.closest('.term-close')) pop.hidden = true;
+  }, true);
 
   const PRAISE = ['GOAL! ⚽', 'Top bins! 🎯', 'What a strike! 💥', 'Back of the net! 🥅', 'Worldie! 🌍', 'Hat-trick hero! 🎩', 'Clinical finish! 🧊', 'Absolute screamer! 📣'];
   const MISS = ['Off the post! 😬', 'VAR says no 📺', 'Offside — have another go 🚩', 'Over the bar! 🙈', 'Saved by the keeper 🧤', 'Into row Z 🏟️'];
@@ -129,6 +185,7 @@
     const n = s.scenes.length;
     idx = Math.max(0, Math.min(n - 1, idx || 0));
     const sc = s.scenes[idx];
+    const seen = new Set();
     app.innerHTML = sectionHeader(s, 'lesson') + `
       <article class="scene">
         <div class="scene-top"><h2>${esc(sc.title)}</h2><span class="muted">Scene ${idx + 1} of ${n}</span></div>
@@ -141,8 +198,8 @@
         </div>
         <p class="step-hint">Tap the picture or press → for the next step, ← to go back</p>
         ${sc.commentator ? `<blockquote class="commentator">🎙️ ${esc(sc.commentator)}</blockquote>` : ''}
-        <div class="scene-text">${sc.text || ''}</div>
-        ${sc.keyFact ? `<div class="keyfact"><b>📝 Exam key fact</b>${sc.keyFact}</div>` : ''}
+        <div class="scene-text">${linkTerms(sc.text, seen)}</div>
+        ${sc.keyFact ? `<div class="keyfact"><b>📝 Exam key fact</b>${linkTerms(sc.keyFact, seen)}</div>` : ''}
         <div class="scene-nav">
           ${idx > 0 ? `<a class="btn ghost" href="#/s/${s.id}/${idx - 1}">◀ Back</a>` : '<span></span>'}
           <button class="btn ghost" id="replay">↻ Replay</button>
@@ -349,9 +406,10 @@
       <div class="card-actions" id="acts"></div></div>`;
     const area = $('#area', box), fb = $('#fb', box), acts = $('#acts', box);
     let finished = false;
+    const seen = new Set();
     const reveal = (ok, extra) => {
       fb.innerHTML = `<div class="verdict ${ok === true ? 'ok' : ok === false ? 'no' : ''}">${ok === true ? pick(PRAISE) : ok === false ? pick(MISS) : ''}</div>
-        ${extra || ''}${c.why ? `<div class="why">💡 ${c.why}</div>` : ''}`;
+        ${linkTerms(extra || '', seen)}${c.why ? `<div class="why">💡 ${linkTerms(c.why, seen)}</div>` : ''}`;
     };
     const nextBtn = (result, label) => {
       acts.innerHTML = `<button class="btn" id="go">${label || 'Next ▶'}</button>`;
@@ -398,7 +456,7 @@
       acts.innerHTML = `<button class="btn" id="flip">Flip card 🔄</button>`;
       $('#flip', acts).focus();
       $('#flip', acts).addEventListener('click', () => {
-        area.innerHTML = `<div class="model big">${c.a}</div>`;
+        area.innerHTML = `<div class="model big">${linkTerms(c.a, seen)}</div>`;
         reveal(null);
         acts.innerHTML = `<button class="btn grade no" data-r="0">❌ Missed it</button><button class="btn grade meh" data-r="1">😬 Nearly</button><button class="btn grade ok" data-r="2">✅ Nailed it</button>`;
         acts.querySelectorAll('.grade').forEach((b) => b.addEventListener('click', () => {

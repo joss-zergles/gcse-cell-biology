@@ -15,10 +15,10 @@ registerSection({
         lines: [
           'The 1600s: early light microscopes let scientists see cells for the first time.',
           'Robert Hooke looked at cork and named the tiny boxes "cells".',
-          '1930s: the electron microscope arrives. That is VAR slow-mo in 4K for biology.',
+          '1930s: the electron microscope arrives, a far more powerful zoom for biology.',
         ],
       },
-      text: 'Early light microscopes were developed in the 1600s and first let scientists see cells. Robert Hooke used one to look at cork and named the boxes he saw <b>cells</b>. Electron microscopes were developed in the 1930s and gave a much more detailed view of the inside of cells.',
+      text: 'Early light microscopes were developed in the 1600s and first let scientists see cells. Robert Hooke used one to look at cork and named the boxes he saw <b>cells</b>. Electron microscopes, which fire a beam of tiny particles called electrons instead of light, were developed in the 1930s. You will meet them properly in the next few scenes.',
       keyFact: 'Light microscopes were developed in the 1600s; electron microscopes were developed in the 1930s.',
     },
     {
@@ -31,14 +31,15 @@ registerSection({
         rows: [
           { feature: 'Maximum magnification', left: '×2000', right: '×2,000,000' },
           { feature: 'Resolution', left: 'about 200 nm', right: 'about 0.1–0.2 nm' },
+          { feature: 'Specimen must be in a vacuum', left: false, right: true },
           { feature: 'Living specimens', left: true, right: false },
           { feature: 'Images in colour', left: true, right: false },
           { feature: 'Cheap to buy and run', left: true, right: false },
           { feature: 'Small and portable', left: true, right: false },
         ],
       },
-      text: 'Light microscopes magnify up to about ×2000 and have a resolution of about 200 nm. They are cheap, portable and can show living specimens in colour. Electron microscopes magnify up to about ×2,000,000 with a resolution of about 0.1–0.2 nm, but they are expensive and large, specimens must be dead and in a vacuum, and the images are black and white.',
-      keyFact: 'Electron microscopes have much higher magnification and resolving power than light microscopes, but their specimens must be dead and their images are black and white.',
+      text: 'Light microscopes use light and magnify up to about ×2000. The × sign means "times", so ×2000 means the image is 2000 times bigger than the real thing. Their resolution (how well they show two close points as separate) is about 200 nm, and they are cheap, portable and can show living specimens in colour. An electron microscope fires a beam of electrons, tiny particles far smaller than atoms, instead of light. Electrons behave like a much shorter wave than light, and shorter waves show much finer detail, so it magnifies up to about ×2,000,000 with a resolution of about 0.1–0.2 nm. The specimen has to sit in a <b>vacuum</b>, a space with all the air pumped out, because air would get in the electrons’ way; that is why specimens must be dead, and the images are black and white.',
+      keyFact: 'Electron microscopes fire a beam of electrons, giving much higher magnification and resolution than light microscopes, but their specimens must be dead and in a vacuum.',
     },
     {
       title: 'The magnification triangle',
@@ -49,27 +50,29 @@ registerSection({
         left: 'Real size',
         right: 'Magnification',
         examples: [
+          'Convert units: 0.05 mm × 1000 = 50 µm',
           'Real size = 40 mm ÷ 100 = 0.4 mm',
           'Image size = 0.02 mm × 1000 = 20 mm',
           'Magnification = 3 mm ÷ 0.006 mm = ×500',
         ],
       },
-      text: 'Magnification = image size ÷ real size. Rearranged, image size = real size × magnification and real size = image size ÷ magnification. Always make sure the units match before you calculate: to change mm into µm, multiply by 1000.',
-      keyFact: 'Magnification = image size ÷ real size.',
+      text: 'Magnification = image size ÷ real size. <b>Image size</b> is how big the cell looks in a drawing or photo, measured with a ruler; <b>real size</b> is how big the cell actually is. Image size and real size must be in the same units before you divide, for example both in mm or both in µm. To change mm into µm, multiply by 1000. Worked example: a real cell is 0.05 mm wide, so in µm it is 0.05 × 1000 = 50 µm.',
+      keyFact: 'Magnification = image size ÷ real size, and both sizes must be in the same units.',
     },
     {
       title: 'Resolution: can you split the pair?',
       commentator: '"Two players sprint side by side from the cheap seats and look like one blob. Move closer and you can finally split them apart!"',
       type: 'commentary',
       params: {
-        emoji: ['🎯', '🔍', '🏅'],
+        emoji: ['🎯', '📱', '🏅'],
         lines: [
           'Resolution is the shortest distance between two points that can still be seen as separate.',
-          'A light microscope can split two points about 200 nm apart.',
-          'An electron microscope can split two points as close as 0.1–0.2 nm, so it shows much finer detail.',
+          'A blurry phone zoom merges two side-by-side players into one blob.',
+          'A sharp 4K replay (a very high-definition picture) shows them as two separate players.',
+          'Magnifying a blurry image only makes it bigger and blurrier.',
         ],
       },
-      text: 'Resolution is the ability to distinguish between two points that are close together. Light microscopes have a resolution of about 200 nm, so anything closer than that blurs into one. Electron microscopes have a resolution of about 0.1–0.2 nm, which lets them reveal the internal structure of mitochondria, chloroplasts, ribosomes and plasmids.',
+      text: 'Resolution is the ability to tell apart two points that are close together. Think of a blurry phone zoom, where two players running side by side merge into one blob, and a sharp 4K replay, where you can see them as two separate players. Magnification and resolution are different: you can magnify a blurry image, but it just gets bigger and blurrier. A light microscope has a resolution of about 200 nm, so anything closer blurs into one, while an electron microscope has about 0.1–0.2 nm, so it can show the internal structure of mitochondria, chloroplasts, ribosomes and plasmids.',
       keyFact: 'Resolution is the shortest distance between two points that can still be seen as separate.',
     },
     {
@@ -80,10 +83,10 @@ registerSection({
         steps: [
           { emoji: '👀', label: 'Eyepiece lens', note: 'example: ×10' },
           { emoji: '🔭', label: 'Objective lens', note: 'example: ×40' },
-          { emoji: '🏆', label: 'Total magnification', note: '×10 × ×40 = ×400' },
+          { emoji: '🏆', label: 'Total magnification', note: '10 × 40 = ×400' },
         ],
       },
-      text: 'Total magnification of a light microscope = eyepiece lens magnification × objective lens magnification. Multiply the two lenses together; do not add them. For example, a ×10 eyepiece and a ×40 objective give a total magnification of ×400.',
+      text: 'Total magnification of a light microscope = eyepiece lens magnification × objective lens magnification. Multiply the two lenses together; do not add them. The × sign means "times", so ×400 means the image looks 400 times bigger than the real thing. For example, a ×10 eyepiece and a ×40 objective give a total magnification of 10 × 40 = ×400.',
       keyFact: 'Total magnification of a light microscope = eyepiece lens magnification × objective lens magnification.',
     },
     {
@@ -100,8 +103,23 @@ registerSection({
           { emoji: '⚡', label: 'Electron microscope limit', size: '0.2 nm', metres: 2e-10 },
         ],
       },
-      text: 'Animal cells are roughly 10–100 µm across, and a mitochondrion is about 1 µm. A light microscope cannot resolve anything smaller than about 200 nm, so tiny structures such as ribosomes are invisible to it. Electron microscopes, with a resolution down to about 0.1–0.2 nm, can reveal the internal structure of these sub-cellular structures.',
+      text: 'Animal cells are roughly 10–30 µm across, and a mitochondrion is about 1 µm. A light microscope cannot show details smaller than about 200 nm, so tiny structures such as ribosomes are invisible to it. Electron microscopes, with a resolution down to about 0.1–0.2 nm, can reveal the internal structure of these tiny sub-cellular structures.',
       keyFact: 'Electron microscopes can resolve sub-cellular structures far smaller than the 200 nm limit of a light microscope.',
+    },
+    {
+      title: 'Why electron microscopes changed biology',
+      commentator: '"Upgrade the camera and the whole game changes! Suddenly the scientists can spot players nobody had seen before!"',
+      type: 'commentary',
+      params: {
+        emoji: ['🧬', '🟣', '🟢'],
+        lines: [
+          'Light microscopes could not show anything smaller than about 200 nm, so tiny structures stayed hidden.',
+          'Electron microscopes let scientists see small structures such as ribosomes for the first time.',
+          'They also showed the inside of mitochondria and chloroplasts, so scientists understood sub-cellular structures far better.',
+        ],
+      },
+      text: 'Because light microscopes cannot show details smaller than about 200 nm, scientists could not see structures such as ribosomes. Electron microscopes, with their much higher resolution, let scientists see ribosomes for the first time and look inside mitochondria and chloroplasts. This greatly increased our understanding of sub-cellular structures, including what they look like inside.',
+      keyFact: 'Electron microscopes increased understanding of sub-cellular structures by showing ribosomes, and the insides of mitochondria and chloroplasts, for the first time.',
     },
   ],
   cards: [
@@ -136,14 +154,14 @@ registerSection({
       why: 'The electron microscope is the VAR zoom, so it can see far deeper into the cell.',
     },
     {
-      q: 'What is the approximate resolving power of an electron microscope?',
+      q: 'What is the approximate resolution of an electron microscope?',
       a: 'Down to about 0.1–0.2 nm',
       options: ['Down to about 20 nm', 'Down to about 0.1–0.2 µm', 'Down to about 2000 nm'],
       why: 'It can split points far closer together than a light microscope, so the picture is much sharper.',
     },
     {
       q: 'How does an electron microscope reveal sub-cellular structures better than a light microscope?',
-      a: 'Its higher magnification and resolving power show fine structures such as ribosomes',
+      a: 'Its higher magnification and resolution show fine structures such as ribosomes',
       options: ['It uses coloured stains to show structures', 'It uses stronger lamps to light the specimen', 'It only looks at the outside of the cell'],
       why: 'It is the 4K slow-mo replay of the same match, catching the tiny details the cheap seats miss.',
     },
@@ -155,7 +173,7 @@ registerSection({
     },
     {
       q: 'Why must electron microscope specimens be dead?',
-      a: 'They must be placed in a vacuum, which living things cannot survive',
+      a: 'They are placed in a vacuum, which would kill living cells',
       options: ['Living cells move too fast to focus on', 'Dead cells show brighter colours', 'Electron beams only work on dead cells'],
       why: 'A vacuum has no air at all, so nothing alive could last five minutes out there.',
     },
@@ -174,7 +192,7 @@ registerSection({
       why: 'Light microscopes were the cheap seats for centuries, then the electron microscope brought the slow-mo in the 1930s.',
     },
     {
-      q: 'A cell is drawn 40 mm wide and the magnification is ×100. What is its real width in mm?',
+      q: 'The image of a cell is 40 mm wide and the magnification is ×100. What is the real width in mm?',
       a: '0.4 mm (40 ÷ 100)',
       options: ['4 mm', '40 mm', '0.04 mm'],
       accept: ['0.4'],
@@ -218,7 +236,7 @@ registerSection({
     {
       q: 'Write 0.0002 mm in standard form.',
       a: '2 × 10⁻⁴ mm',
-      options: ['2 × 10⁴ mm', '0.2 × 10⁻³ mm', '2 × 10⁻³ mm'],
+      options: ['2 × 10⁴ mm', '2 × 10⁻³ mm', '2 × 10⁻⁵ mm'],
       why: 'Standard form has one non-zero digit before the decimal point, and the power counts how far the decimal point moves.',
     },
   ],

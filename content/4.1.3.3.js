@@ -4,7 +4,7 @@ registerSection({
   topic: 'Transport in cells',
   emoji: '🧤',
   biologyOnly: false,
-  intro: 'Active transport is the goalkeeper-steward hauling fans from the nearly empty away end INTO the packed home end, against the crowd. It is hard work, so it runs on energy drinks from the mitochondria.',
+  intro: 'Active transport is the goalkeeper-steward hauling fans from the nearly empty away end INTO the packed home end, against the crowd. It is hard work, so it needs energy from respiration in the mitochondria.',
   scenes: [
     {
       title: 'Pumping against the crowd',
@@ -19,12 +19,12 @@ registerSection({
         membraneLabel: 'cell membrane',
         captions: [
           'Few mineral ions in the dilute soil solution on the left.',
-          'The pump grabs each ion and pushes it across the membrane.',
+          'Carrier proteins grab each ion and carry it across the membrane.',
           'Ions end up in the root hair cell, where they are more concentrated, against the gradient.',
         ],
       },
-      text: 'Active transport moves particles from a more dilute solution to a more concentrated solution, <b>against</b> the concentration gradient. It needs <b>energy from respiration</b> and uses <b>carrier proteins</b> in the cell membrane.',
-      keyFact: 'Active transport moves particles from a low concentration to a high concentration, against the concentration gradient, using energy from respiration.',
+      text: 'Picture pushing fans <i>INTO</i> a packed stand: <b>active transport</b> moves particles from where there are few to where there are already lots. This goes <b>against the concentration gradient</b>, the slope from crowded to empty, so it does not happen by itself. It needs <b>energy from respiration</b>. The particles are carried across the cell membrane by <b>carrier proteins</b>: proteins in the membrane that grab particles on one side and carry them across to the other side.',
+      keyFact: 'Active transport moves particles from a low concentration to a high concentration, against the concentration gradient, using energy from respiration and carrier proteins.',
     },
     {
       title: 'The squad for a root hair cell',
@@ -42,18 +42,33 @@ registerSection({
       keyFact: 'Root hair cells have many mitochondria because they carry out a lot of active transport, which needs energy from respiration.',
     },
     {
+      title: 'Why plants need nitrate and magnesium',
+      commentator: '"Two key signings for the plant squad: one builds the proteins, the other builds the green stuff that catches the light!"',
+      type: 'versus',
+      params: {
+        left: { name: 'Nitrate ions', emoji: '🏗️' },
+        right: { name: 'Magnesium ions', emoji: '🍃' },
+        rows: [
+          { feature: 'Used to make', left: 'Proteins', right: 'Chlorophyll' },
+          { feature: 'What it helps the plant do', left: 'Grow healthily', right: 'Absorb light for photosynthesis' },
+        ],
+      },
+      text: 'Plants take <b>mineral ions</b> in from the soil through their root hair cells. <b>Nitrate ions</b> are needed to make <b>proteins</b>, which the plant uses for healthy growth. <b>Magnesium ions</b> are needed to make <b>chlorophyll</b>, the green substance in chloroplasts that absorbs light for photosynthesis. Without enough magnesium, a plant cannot make enough chlorophyll, and its leaves can turn yellow.',
+      keyFact: 'Plants need nitrate ions to make proteins for growth, and magnesium ions to make chlorophyll for photosynthesis.',
+    },
+    {
       title: 'Two big examples',
-      commentator: '"Active transport on two fronts: the roots in the soil, and the gut pulling sugar into the blood!"',
+      commentator: '"Active transport on two fronts: the roots in the soil, and the gut pulling glucose into the blood!"',
       type: 'branch',
       params: {
         centre: { emoji: '🧤', label: 'Active transport' },
         outcomes: [
           { emoji: '🌱', label: 'Root hair cells', note: 'mineral ions from very dilute soil, e.g. nitrate and magnesium' },
-          { emoji: '🍬', label: 'Small intestine', note: 'sugar from the gut into the blood, which has a higher sugar concentration' },
+          { emoji: '🍬', label: 'Small intestine', note: 'glucose from the gut into the blood, where glucose is more concentrated' },
         ],
       },
-      text: 'Root hair cells take in mineral ions from very dilute soil. The small intestine takes sugar from a lower concentration in the gut into the blood, where the sugar concentration is higher. The sugar is then used for cell respiration.',
-      keyFact: 'Active transport moves mineral ions into root hair cells and sugar from the gut into the blood, against the concentration gradient.',
+      text: 'Root hair cells take in mineral ions from very dilute soil. The <b>small intestine</b> is part of the <b>gut</b>, the tube where food is digested. Digested food is absorbed through the small intestine into the blood. The sugar absorbed is <b>glucose</b>, which moves from a lower concentration in the gut into a higher concentration in the blood, against the gradient. The glucose is then used in <b>respiration</b> to release energy.',
+      keyFact: 'Active transport moves mineral ions into root hair cells and glucose from the gut into the blood, against the concentration gradient.',
     },
     {
       title: 'Diffusion vs active transport',
@@ -65,12 +80,12 @@ registerSection({
         rows: [
           { feature: 'Needs energy from respiration', left: false, right: true },
           { feature: 'Direction', left: 'High to low', right: 'Low to high' },
-          { feature: 'Particles moved', left: 'Any particles', right: 'e.g. ions and sugar' },
+          { feature: 'Particles moved', left: 'Any particles', right: 'e.g. ions and glucose' },
           { feature: 'Uses carrier proteins', left: false, right: true },
           { feature: 'Against the concentration gradient', left: false, right: true },
         ],
       },
-      text: 'Diffusion moves any particles down a concentration gradient, from high to low, with no energy needed. Active transport moves particles from low to high, against the gradient, and needs <b>energy from respiration</b>.',
+      text: 'Diffusion and osmosis are <b>passive</b>: they happen by themselves, with no energy needed, and move substances down a concentration gradient. Active transport is <b>active</b>: it needs energy from respiration and moves substances up the gradient, from low to high concentration.',
       keyFact: 'Diffusion is passive and moves particles from high to low concentration, whereas active transport moves them from low to high concentration using energy from respiration.',
     },
     {
@@ -81,7 +96,7 @@ registerSection({
         steps: [
           { emoji: '⚽', label: 'Diffusion', note: 'any particles, high to low, no energy needed' },
           { emoji: '💧', label: 'Osmosis', note: 'water only, dilute to concentrated through a partially permeable membrane, no energy needed' },
-          { emoji: '🧤', label: 'Active transport', note: 'e.g. ions and sugar, low to high, needs energy from respiration' },
+          { emoji: '🧤', label: 'Active transport', note: 'e.g. ions and glucose, low to high, needs energy from respiration' },
         ],
       },
       text: 'Diffusion and osmosis are <b>passive</b>: they need no energy and move substances down a concentration gradient. Osmosis moves water only, through a partially permeable membrane. Active transport is the only one of the three that moves substances against the gradient.',
@@ -100,7 +115,7 @@ registerSection({
           'Root hair cells and the small intestine are the big examples.',
         ],
       },
-      text: 'Active transport moves substances from low to high concentration, against the gradient, using energy from respiration and carrier proteins. Root hair cells absorb mineral ions this way, and the small intestine absorbs sugar this way.',
+      text: 'Active transport moves substances from low to high concentration, against the gradient, using energy from respiration and carrier proteins. Root hair cells absorb mineral ions this way, and the small intestine absorbs glucose this way.',
       keyFact: 'Active transport moves substances from low to high concentration, against the gradient, using energy from respiration and carrier proteins.',
     },
   ],
@@ -128,7 +143,7 @@ registerSection({
     },
     {
       q: 'What is a carrier protein?',
-      a: 'A protein in the cell membrane that carries particles across it during active transport',
+      a: 'A protein in the cell membrane that grabs particles on one side and carries them across to the other side, using energy',
       options: [
         'A protein that makes the cell wall stronger',
         'A sugar molecule stored for later respiration',
@@ -168,28 +183,34 @@ registerSection({
       a: 'Magnesium ions',
       accept: ['magnesium'],
       options: ['Calcium ions', 'Potassium ions', 'Oxygen molecules'],
-      why: 'Magnesium is the ion inside chlorophyll, the green pigment that catches light.',
+      why: 'Magnesium is the ion inside chlorophyll, the green substance that catches light for photosynthesis.',
     },
     {
-      q: 'In the small intestine, sugar moves from the gut into the blood. Why does this need active transport?',
-      a: 'The sugar moves from a lower concentration in the gut to a higher concentration in the blood, against the gradient',
+      q: 'Which part of the gut absorbs digested food into the blood?',
+      a: 'The small intestine',
+      options: ['The mouth', 'The stomach', 'The oesophagus'],
+      why: 'The small intestine is the long stretch of gut where the food fans get into the blood.',
+    },
+    {
+      q: 'In the small intestine, glucose moves from the gut into the blood. Why does this need active transport?',
+      a: 'The glucose moves from a lower concentration in the gut to a higher concentration in the blood, against the gradient',
       options: [
-        'The sugar moves from a higher concentration in the gut to a lower concentration in the blood',
-        'The sugar moves through the cell wall, which needs no energy',
-        'The sugar moves only when the blood is cold',
+        'The glucose moves from a higher concentration in the gut to a lower concentration in the blood',
+        'The glucose moves through the cell wall, which needs no energy',
+        'The glucose moves only when the blood is cold',
       ],
-      why: 'The blood is already packed with sugar, so the steward has to push fans into the crowd.',
+      why: 'The blood is already packed with glucose, so the steward has to push fans into the crowd.',
     },
     {
-      q: 'Why does the body need the sugar absorbed into the blood?',
-      a: 'It is used for cell respiration to release energy',
+      q: 'Why does the body need the glucose absorbed into the blood?',
+      a: 'It is used in cell respiration to release energy',
       accept: ['respiration'],
       options: [
         'It is used to make the cell wall thicker',
-        'It is excreted by the kidneys as waste',
+        'It is stored as cellulose in the cell wall',
         'It is stored as water in the vacuole',
       ],
-      why: 'The sugar is fuel, so the cells can respire and release energy.',
+      why: 'The glucose is fuel, so the cells can respire and release energy.',
     },
     {
       q: 'Which process moves any particles, such as oxygen, from high to low concentration with no energy?',
@@ -207,7 +228,7 @@ registerSection({
     {
       q: 'Which of these moves particles from low to high concentration?',
       a: 'Active transport',
-      options: ['Diffusion', 'Osmosis', 'Diffusion through pores'],
+      options: ['Diffusion', 'Osmosis', 'Passive diffusion'],
       why: 'Only active transport goes uphill against the crowd.',
     },
     {
@@ -224,7 +245,7 @@ registerSection({
       q: 'What is osmosis?',
       a: 'The movement of water from a dilute solution to a concentrated solution through a partially permeable membrane',
       options: [
-        'The movement of sugar from a concentrated solution to a dilute one',
+        'The movement of glucose from a concentrated solution to a dilute one',
         'The movement of particles from low to high concentration using energy',
         'The movement of water through the cell wall with no membrane involved',
       ],
@@ -243,7 +264,7 @@ registerSection({
     {
       q: 'Which structure in the cell membrane is used to carry particles during active transport?',
       a: 'Carrier proteins',
-      options: ['Pores', 'Cellulose fibres', 'Phospholipid heads'],
+      options: ['Pores', 'Cellulose fibres', 'Chlorophyll molecules'],
       why: 'The carrier proteins are the stewards who escort particles through the membrane.',
     },
   ],

@@ -7,6 +7,22 @@ registerSection({
   intro: 'Water fans are slipping through the turnstile and pouring into the crowded end. Get osmosis sorted, then join the potato penalty shootout.',
   scenes: [
     {
+      title: 'Dilute vs concentrated',
+      commentator: '"Look at the dilute side — loads of water fans, barely any sugar in the stands!"',
+      type: 'versus',
+      params: {
+        left: { name: 'Dilute solution', emoji: '💧' },
+        right: { name: 'Concentrated solution', emoji: '🍬' },
+        rows: [
+          { feature: 'Solute (dissolved substance)', left: 'A little', right: 'Lots' },
+          { feature: 'Water (the solvent)', left: 'Lots', right: 'Less' },
+          { feature: 'Water concentration', left: 'Higher', right: 'Lower' },
+        ],
+      },
+      text: 'A <b>solute</b> is the substance that dissolves, such as sugar or salt. The liquid it dissolves in is the <b>solvent</b>, which is water here. A <b>dilute solution</b> has lots of water and only a little solute; a <b>concentrated solution</b> has lots of solute and relatively less water. KEY IDEA: a dilute solution has a <b>higher concentration of water</b> than a concentrated one. A <b>partially permeable membrane</b> has tiny holes that let small molecules, like water, through but block bigger ones, like sugar. Think of a turnstile that only lets small fans through.',
+      keyFact: 'A dilute solution has a higher concentration of water than a concentrated solution, because it contains less solute.',
+    },
+    {
       title: 'Water fans through the turnstile',
       commentator: '"And the water fans are slipping through the turnstile — but the big inflatable bananas are stuck at the gate!"',
       type: 'flow',
@@ -24,25 +40,8 @@ registerSection({
           'Net movement: dilute solution to concentrated solution',
         ],
       },
-      text: '<b>Osmosis</b> is the diffusion of water from a dilute solution to a concentrated solution through a <b>partially permeable membrane</b>. Water molecules are small enough to pass through; large solute molecules, such as sugar, cannot. The net movement is always from the dilute side (higher water concentration) to the concentrated side (lower water concentration).',
+      text: '<b>Osmosis</b> is a special case of <b>diffusion</b>: it is the diffusion of <b>water only</b>, through a partially permeable membrane. Water moves from the dilute solution to the concentrated solution, because water is more concentrated on the dilute side. The sugar is too big to pass through the membrane, so it stays on the concentrated side.',
       keyFact: 'Osmosis is the diffusion of water from a dilute solution to a concentrated solution through a partially permeable membrane.',
-    },
-    {
-      title: 'Required practical: potato penalty shootout',
-      commentator: '"Every strip gets the same kick in the same conditions — that is how you win a fair test!"',
-      type: 'chain',
-      params: {
-        steps: [
-          { emoji: '🥔', label: 'Cut potato cylinders', note: 'Cork borer: same size, same surface area' },
-          { emoji: '⚖️', label: 'Blot and weigh', note: 'Record the initial mass' },
-          { emoji: '🧪', label: 'Add the solutions', note: '0, 0.2, 0.4, 0.6, 0.8, 1.0 M, same volume each' },
-          { emoji: '⏱️', label: 'Wait the same time', note: 'e.g. 24 hours, at the same temperature' },
-          { emoji: '⚖️', label: 'Blot and reweigh', note: 'Record the final mass' },
-          { emoji: '📊', label: 'Work out % change', note: 'Plot % change against concentration' },
-        ],
-      },
-      text: 'Required practical 3: investigate how the mass of plant tissue changes in sugar or salt solutions of different concentrations. The <b>concentration</b> of the solution is the <b>independent variable</b> and the <b>percentage change in mass</b> is the <b>dependent variable</b>. Keep the size of the potato, the time, the temperature and the volume of solution the same: these are <b>control variables</b>.',
-      keyFact: 'In the potato practical, the independent variable is the concentration of the solution and the dependent variable is the percentage change in mass.',
     },
     {
       title: 'Percentage change, step by step',
@@ -57,8 +56,25 @@ registerSection({
           'Always divide by the START mass, not the finish.',
         ],
       },
-      text: 'Percentage change in mass shows how much a piece of plant tissue has gained or lost, compared with its starting mass. A gain gives a positive answer; a loss gives a negative answer. Always divide by the <b>initial</b> mass.',
+      text: 'Potato pieces start at different masses, so comparing the raw mass change is not fair: a 0.5 g gain is 25% of a 2 g piece but only 2.5% of a 20 g piece. <b>Percentage change</b> compares the change with the starting mass, so every piece is on the same scale. A gain gives a positive answer; a loss gives a negative answer. Always divide by the <b>initial</b> (starting) mass.',
       keyFact: 'Percentage change in mass = (final mass − initial mass) ÷ initial mass × 100.',
+    },
+    {
+      title: 'Required practical: potato penalty shootout',
+      commentator: '"Every strip gets the same kick in the same conditions — that is how you win a fair test!"',
+      type: 'chain',
+      params: {
+        steps: [
+          { emoji: '🥔', label: 'Cut potato cylinders', note: 'Cork borer (a tube-shaped cutter): same size each time' },
+          { emoji: '🧻', label: 'Blot dry, then weigh', note: 'Removes surface water so it does not add mass' },
+          { emoji: '🧪', label: 'Add the solutions', note: '0 to 1.0 M sugar, same volume each' },
+          { emoji: '⏱️', label: 'Wait the same time', note: 'e.g. 24 hours, at the same temperature' },
+          { emoji: '⚖️', label: 'Blot dry, reweigh', note: 'Record the final mass' },
+          { emoji: '📊', label: 'Work out % change', note: 'Plot % change against concentration' },
+        ],
+      },
+      text: 'Required practical 3: investigate how the mass of potato changes in sugar or salt solutions of different concentrations. The <b>independent variable</b> is the thing you change on purpose: the concentration of the solution. Concentration is measured in <b>M</b> (molar), a unit of concentration: the bigger the number, the more sugar or salt is dissolved. The <b>dependent variable</b> is the thing you measure: the percentage change in mass. <b>Control variables</b> are the things you keep the same so the test is fair: potato size, time, temperature and volume of solution.',
+      keyFact: 'In the potato practical, the independent variable is the concentration of the solution and the dependent variable is the percentage change in mass.',
     },
     {
       title: 'Reading the graph',
@@ -69,10 +85,10 @@ registerSection({
         lines: [
           'Plot % change in mass on the y-axis and concentration on the x-axis.',
           'Above the x-axis: a gain. Water moved in, so the solution was more dilute than the cells.',
-          'Where the line crosses the x-axis (0% change): the solution matches the cells. No net water movement.',
+          'Crossing the x-axis at 0%: the solution matches the cells. No net water movement.',
         ],
       },
-      text: 'Draw a line of best fit through the points. The point where the line crosses the x-axis, at 0% change, shows the solution concentration that is the same as the concentration inside the cells. At that point there is no net movement of water.',
+      text: 'Draw a <b>line of best fit</b>: a smooth line drawn through the middle of the points to show the pattern. It does not have to hit every point. Where the line crosses the x-axis, at 0% change, the solution has the same concentration as the cells, so there is no net movement of water.',
       keyFact: 'Where the line crosses the x-axis at 0% change, the solution concentration equals the concentration inside the cells and there is no net movement of water.',
     },
     {
@@ -84,12 +100,12 @@ registerSection({
         right: { name: 'Plant cell', emoji: '🌿' },
         rows: [
           { feature: 'Cell wall', left: false, right: true },
-          { feature: 'In pure water', left: 'Swells and bursts (lysis)', right: 'Becomes turgid, wall stops bursting' },
-          { feature: 'In concentrated solution', left: 'Shrinks', right: 'Becomes flaccid (plasmolysed)' },
+          { feature: 'In pure water', left: 'Swells and bursts (lysis)', right: 'Turgid: firm, pressing on the wall' },
+          { feature: 'In concentrated solution', left: 'Shrinks', right: 'Flaccid, then plasmolysed' },
         ],
       },
-      text: 'Animal cells have no cell wall, so in pure water they take in water by osmosis until they swell and burst. Plant cells have a strong cell wall that pushes back, so they become <b>turgid</b> instead. In concentrated solutions both lose water: animal cells shrink, and plant cells become flaccid as the cytoplasm pulls away from the cell wall.',
-      keyFact: 'Animal cells have no cell wall, so they can swell and burst in pure water; plant cells become turgid because the cell wall stops them bursting.',
+      text: 'Animal cells have no cell wall, so in pure water they take in water by osmosis until they swell and burst. This bursting is called <b>lysis</b>. Plant cells have a strong cell wall, so they swell until they are <b>turgid</b>: swollen and firm, pressing against the wall, which stops them bursting. In a concentrated solution, a plant cell loses water and becomes <b>flaccid</b>: soft and floppy. If so much water leaves that the cytoplasm pulls away from the cell wall, the cell is undergoing <b>plasmolysis</b>.',
+      keyFact: 'Animal cells have no cell wall, so they can swell and burst (lysis) in pure water; plant cells become turgid because the cell wall stops them bursting.',
     },
     {
       title: 'Isotonic sports drinks',
@@ -98,12 +114,12 @@ registerSection({
       params: {
         emoji: ['🥤', '⚽', '💦'],
         lines: [
-          '"Isotonic" sports drinks have the same concentration as the body\'s fluids.',
-          'So the drink does not cause a big net flow of water into or out of your cells.',
+          '"Isotonic" means the same concentration as the body\'s fluids.',
+          'So an isotonic drink does not cause a big net flow of water into or out of your cells.',
           'Replacing lost water and salts without upsetting your cells: that is the sports science.',
         ],
       },
-      text: 'Isotonic sports drinks have the same concentration as body fluids. They help replace water and salts lost in sweat without causing a large net movement of water into or out of cells by osmosis.',
+      text: '<b>Isotonic</b> means having the same concentration as something else. Isotonic sports drinks have the same concentration as body fluids, so they replace water and salts lost in sweat without a big net movement of water into or out of cells by osmosis.',
       keyFact: 'Isotonic sports drinks have the same concentration as body fluids.',
     },
   ],
@@ -113,10 +129,10 @@ registerSection({
       a: 'Diffusion of water from a dilute to a concentrated solution through a partially permeable membrane',
       options: [
         'Movement of sugar from a concentrated to a dilute solution',
-        'Active transport of glucose against a concentration gradient',
+        'Water moving from a concentrated to a dilute solution through a membrane',
         'Water being pumped across a membrane using energy from respiration',
       ],
-      why: 'Water fans slip through the turnstile and head for the crowded end.',
+      why: 'It is diffusion, but only for water, and only through a partially permeable membrane.',
     },
     {
       q: 'In osmosis, which way does the net movement of water go?',
@@ -139,6 +155,16 @@ registerSection({
       why: 'The big inflatable bananas get stuck at the turnstile while the water fans slip through.',
     },
     {
+      q: 'In a sugar solution, what is the solute?',
+      a: 'The sugar, the substance dissolved in the water',
+      options: [
+        'The water, because it does the dissolving',
+        'The beaker the solution is kept in',
+        'The whole mixture of sugar and water together',
+      ],
+      why: 'The solute is the thing that dissolves; the water is the solvent doing the dissolving.',
+    },
+    {
       q: 'A potato strip goes from 2.0 g to 2.5 g. What is its percentage change in mass?',
       a: '+25% (a gain)',
       accept: ['25'],
@@ -159,33 +185,15 @@ registerSection({
       why: 'Gain 1.0 g ÷ starting mass 5.0 g × 100 = 20%. Always divide by the starting mass.',
     },
     {
-      q: 'A potato strip goes from 10.0 g to 8.0 g. What is its percentage change in mass?',
-      a: '−20%',
-      options: ['+20%', '−25%', '−80%'],
-      why: 'Lost 2.0 g ÷ starting mass 10.0 g × 100 = 20%. A loss, so the sign is negative.',
-    },
-    {
-      q: 'A potato strip goes from 3.0 g to 4.5 g. What is its percentage change in mass?',
-      a: '+50%',
-      options: ['+33%', '+150%', '−50%'],
-      why: 'Gain 1.5 g ÷ starting mass 3.0 g × 100 = 50%.',
-    },
-    {
-      q: 'A potato strip gains 0.6 g in 3 hours. What is its rate of mass gain in g per hour?',
-      a: '0.2 g per hour',
-      accept: ['0.2'],
-      options: ['0.6 g per hour', '1.8 g per hour', '5 g per hour'],
-      why: 'Rate = change in mass ÷ time: 0.6 ÷ 3 = 0.2 g per hour.',
-    },
-    {
-      q: 'Why must every potato cylinder be cut to the same size with a cork borer?',
-      a: 'To keep surface area the same, so the test is fair',
+      q: 'Which solution has the higher concentration of water: dilute or concentrated?',
+      a: 'The dilute solution',
+      accept: ['dilute'],
       options: [
-        'So the potato absorbs more sugar than other potatoes',
-        'So the cylinders sink to the bottom of the solution',
-        'To stop bacteria getting into the potato during the test',
+        'The concentrated solution',
+        'Both have exactly the same amount of water',
+        'Neither solution contains any water',
       ],
-      why: 'Same size means same surface area, so every strip has an equal chance of gaining or losing water.',
+      why: 'A dilute solution has lots of water and only a little solute dissolved in it.',
     },
     {
       q: 'What are the variables called that are kept the same to make a test fair?',
@@ -202,24 +210,41 @@ registerSection({
       why: 'You choose the concentration on purpose; the change in mass is what you measure.',
     },
     {
+      q: 'In the potato practical, what is the dependent variable?',
+      a: 'The percentage change in mass',
+      accept: ['percentage'],
+      options: ['The concentration of the solution', 'The temperature of the room', 'The size of the potato cylinders'],
+      why: 'You measure how the mass changes; the size and temperature are kept the same.',
+    },
+    {
+      q: 'What does the M in a 0.2 M sugar solution mean?',
+      a: 'A unit of concentration: the bigger the number, the more solute dissolved',
+      options: [
+        'A unit of time, like seconds',
+        'A unit of mass, like grams',
+        'A unit of length, like millimetres',
+      ],
+      why: 'M (molar) is a scale for how much sugar or salt is dissolved in the water.',
+    },
+    {
+      q: 'What is a line of best fit?',
+      a: 'A smooth line drawn through the middle of the points to show the pattern',
+      options: [
+        'A line that joins every point exactly, dot to dot',
+        'A line drawn only through the first and last points',
+        'A line that must always start at zero',
+      ],
+      why: 'It smooths out the bumps so the overall pattern is clear.',
+    },
+    {
       q: 'On a percentage change graph, what does the line crossing the x-axis at 0% tell you?',
-      a: 'The solution matches the cells, so no net water movement',
+      a: 'The solution has the same concentration as the cells, so no net water movement',
       options: [
         'The potato lost the most mass',
         'The solution is pure water',
         'The potato cell wall has been destroyed',
       ],
       why: 'No water fans cross in either direction, so the mass does not change.',
-    },
-    {
-      q: 'A point above the x-axis on the graph shows a positive percentage change. What does this mean?',
-      a: 'Water moved into the potato, so the solution was more dilute than the cells',
-      options: [
-        'Water moved out, so the solution was more concentrated than the cells',
-        'The potato dissolved sugar from the solution',
-        'The salt damaged the potato cell walls',
-      ],
-      why: 'Positive means a gain: water fans flooded in from the dilute side.',
     },
     {
       q: 'What happens to an animal cell placed in pure water?',
@@ -230,7 +255,7 @@ registerSection({
         'It becomes firm and turgid',
         'Nothing happens, because water cannot enter animal cells',
       ],
-      why: 'No cell wall means nothing stops it swelling until it bursts. This is called lysis.',
+      why: 'No cell wall means nothing stops it swelling until it bursts. Bursting is called lysis.',
     },
     {
       q: 'Why does a plant cell not burst when it is placed in pure water?',
@@ -243,10 +268,11 @@ registerSection({
       why: 'The cell wall is like a strong keeper: it holds the cell firm.',
     },
     {
-      q: 'What is a plant cell called when it has lost lots of water and its cytoplasm pulls away from the cell wall?',
-      a: 'Plasmolysed (flaccid)',
-      options: ['Turgid', 'Lysed', 'Isotonic'],
-      why: 'It lost water in a concentrated solution, so the membrane pulls away from the wall.',
+      q: 'What is it called when so much water has left a plant cell that the cytoplasm pulls away from the cell wall?',
+      a: 'Plasmolysis',
+      accept: ['plasmolysis'],
+      options: ['Turgid', 'Lysis', 'Isotonic'],
+      why: 'The cell lost lots of water in a concentrated solution, so its contents shrink away from the wall.',
     },
     {
       q: 'What does "isotonic" mean for a sports drink?',
@@ -257,6 +283,19 @@ registerSection({
         'It must be drunk before, never during, exercise',
       ],
       why: 'Same strength as your body fluids, so it does not cause a big water shift in or out of your cells.',
+    },
+    {
+      "q": "A potato strip gains 0.6 g in 3 hours. What is its rate of mass gain in g per hour?",
+      "a": "0.2 g per hour",
+      "options": [
+        "0.6 g per hour",
+        "1.8 g per hour",
+        "5 g per hour"
+      ],
+      "accept": [
+        "0.2"
+      ],
+      "why": "Rate = change ÷ time, so 0.6 g ÷ 3 hours = 0.2 g per hour."
     },
   ],
 });

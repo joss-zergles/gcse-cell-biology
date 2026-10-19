@@ -35,8 +35,8 @@ registerSection({
   emoji: '🏃',                          // one emoji for the fixtures list
   biologyOnly: false,                  // true only for 4.1.1.6
   intro: 'One or two punchy sentences: the football hook for the whole section.',
-  scenes: [ /* 4–6 scenes, see below */ ],
-  cards:  [ /* 12–18 flashcards, see below */ ],
+  scenes: [ /* 4–8 scenes, see below */ ],
+  cards:  [ /* 12–24 flashcards — cover every spec point, never drop one to save space */ ],
 });
 ```
 
@@ -148,3 +148,35 @@ Card rules:
 - Escape apostrophes inside single-quoted strings (`'it\'s'`) or use double quotes / backticks.
 
 When done, check the file is valid JS: `node -e "global.registerSection=s=>console.log(s.id, s.scenes.length, s.cards.length); require('./content/<id>.js')"`
+
+## Explain before you use (most important after accuracy)
+
+He works through the sections **in order** (4.1.1.1 → 4.1.3.3) and knows **nothing** beyond KS3 basics.
+Every scientific word must be explained in plain English **the first time it appears in the course** —
+in the scene's `text` (or an earlier scene in the same section) — before or at the moment it is used in a
+picture, a key fact or a card. If a word belongs to a later section, either avoid it or give a one-line
+plain explanation plus "(more on this in <section title>)".
+
+- A scene's picture and its `text` appear together, so the `text` must explain any new word the picture shows.
+- Order scenes so the basics come first (e.g. units before a size chart that uses them).
+- Don't define a word by using another undefined word.
+- Cards may only test words that the lesson has explained.
+
+### Concept order — which section introduces what
+
+| Section | Introduces (must explain these) |
+|---|---|
+| 4.1.1.1 | cell, organism, sub-cellular structure, cell membrane, cytoplasm, nucleus, genetic material, DNA, chromosome, DNA loop, plasmid, cell wall, eukaryote, prokaryote, bacteria, virus, cm/mm/µm/nm, standard form, order of magnitude |
+| 4.1.1.2 | protein, enzyme, ribosome, protein synthesis, glucose, respiration (≠ breathing), aerobic, mitochondria, photosynthesis, chlorophyll, chloroplast, permanent vacuole, cell sap, cellulose, algae, light microscope parts (eyepiece, objective lens, stage, coarse/fine focus), specimen, slide, coverslip, stain, magnification (simple idea), estimate |
+| 4.1.1.3 | specialised, tissue, organ, organ system, fertilisation, egg, acrosome, nerve impulse, axon, dendrite, myelin, glycogen, mineral ions, root hair, xylem, lignin, phloem, sieve plate, companion cell |
+| 4.1.1.4 | differentiation, multicellular, embryo, mature, repair and replacement |
+| 4.1.1.5 | resolution, electron microscope, electron, vacuum, total magnification |
+| 4.1.1.6 | microorganism, binary fission, nutrients, nutrient broth, agar, Petri dish, colony, contamination, aseptic technique, sterilise, autoclave, inoculating loop, incubate, pathogen, anaerobic, antiseptic, antibiotic, disinfectant, bacterial lawn, zone of inhibition, control (experiment) |
+| 4.1.2.1 | gene, characteristic, gamete, chromosome pairs |
+| 4.1.2.2 | cell cycle, replicate, daughter cell, mitosis, asexual reproduction |
+| 4.1.2.3 | stem cell, undifferentiated, bone marrow, clone, rejection (immune system), diabetes, paralysis, therapeutic cloning, ethical, meristem |
+| 4.1.3.1 | particle, concentration, concentration gradient, net movement, solution, diffusion, urea, blood plasma, excretion, surface area, volume, SA:V ratio, exchange surface, alveoli, villi, gills, stomata, ventilation |
+| 4.1.3.2 | osmosis, dilute, concentrated, solute, partially permeable membrane, turgid, flaccid, plasmolysis, lysis, isotonic, independent / dependent / control variables, M (molar concentration), percentage change, line of best fit |
+| 4.1.3.3 | active transport, carrier protein, passive |
+
+There is also a tap-to-define glossary (`content/glossary.js`), but it is a safety net — the lesson itself must still explain each word.

@@ -4,7 +4,7 @@ registerSection({
   topic: 'Cell division',
   emoji: '🔄',
   biologyOnly: false,
-  intro: 'Before a cell can split, it has to copy its whole squad and kit, then divide into two identical teams. Welcome to mitosis, the greatest copy-and-paste job in biology.',
+  intro: 'Before a cell can split, it has to copy its whole squad and kit. That copy-and-share job is called mitosis: the copied chromosomes are separated and the nucleus divides, so each new cell gets an identical set. Welcome to the greatest copy-and-paste show in biology!',
   scenes: [
     {
       title: 'The cell cycle: three stages',
@@ -12,12 +12,12 @@ registerSection({
       type: 'cycle',
       params: {
         stages: [
-          { label: 'Stage 1: Growth and DNA copying', detail: 'The cell grows and makes more sub-cellular structures. The DNA replicates to form two copies of each chromosome.' },
-          { label: 'Stage 2: Mitosis', detail: 'One set of chromosomes is pulled to each end of the cell and the nucleus divides.' },
-          { label: 'Stage 3: Splitting', detail: 'The cytoplasm and cell membranes divide, forming two identical daughter cells.' },
+          { label: 'Stage 1: Growth and DNA copying', detail: 'The cell grows and makes more sub-cellular structures. The DNA copies itself, so each chromosome has two copies.' },
+          { label: 'Stage 2: Mitosis', detail: 'The copied chromosomes are separated, with one set pulled to each end of the cell, and the nucleus divides.' },
+          { label: 'Stage 3: Splitting', detail: 'The cytoplasm and cell membranes divide, making two identical new cells.' },
         ],
       },
-      text: 'Cells divide in a series of stages called the <b>cell cycle</b>. In Stage 1 the cell grows and makes more sub-cellular structures, such as ribosomes and mitochondria, and its DNA replicates. Stage 2 is <b>mitosis</b>, where the nucleus divides. In Stage 3 the cytoplasm and cell membranes divide to form two identical cells.',
+      text: 'Cells divide by going through a repeating series of stages called the <b>cell cycle</b>, a bit like a season of fixtures that starts again. In Stage 1 the cell grows and makes more sub-cellular structures, such as ribosomes and mitochondria, and its DNA <b>replicates</b> (makes an exact copy of itself), so each chromosome becomes two copies that are exactly the same, which is what <b>identical</b> means. Stage 2 is <b>mitosis</b>: the copied chromosomes are separated and the nucleus divides. Stage 3 is when the cytoplasm and cell membranes divide, leaving two <b>daughter cells</b>, the two new cells made when a cell divides.',
       keyFact: 'The cell cycle has three stages: cell growth and DNA replication, then mitosis, then division of the cytoplasm and cell membrane.',
     },
     {
@@ -67,7 +67,7 @@ registerSection({
           { emoji: '🧍', label: 'Full organism', note: 'Growth and development of the body' },
         ],
       },
-      text: 'Mitosis is essential for the <b>growth and development</b> of multicellular organisms. Each division produces two identical cells, so the number of cells keeps increasing as the organism grows.',
+      text: 'Mitosis is essential for <b>growth and development</b>. Growth means getting bigger, and development means forming all the body\'s parts, such as tissues and organs. Each division produces two identical cells, so the number of cells keeps increasing as the organism grows.',
       keyFact: 'Cell division by mitosis is important in the growth and development of multicellular organisms.',
     },
     {
@@ -83,8 +83,8 @@ registerSection({
           { emoji: '🦠', label: 'Asexual reproduction', note: 'Identical offspring, no second parent' },
         ],
       },
-      text: 'Mitosis is used for <b>growth</b>, for <b>repair</b> such as healing a cut or broken bone, and for <b>replacing</b> cells that wear out. Some organisms also use mitosis for <b>asexual reproduction</b>, producing offspring that are genetically identical to the parent.',
-      keyFact: 'Mitosis is used for growth, repair and replacing cells, and in asexual reproduction in some organisms.',
+      text: 'Mitosis is used for <b>growth</b>, for <b>repair</b> such as healing a cut or broken bone, and for <b>replacing</b> worn-out cells. Some organisms also use it for <b>asexual reproduction</b>, which means making offspring from <b>one parent only</b>, unlike sexual reproduction, which needs two parents. The offspring are <b>genetically identical</b> to the parent, meaning they have exactly the same DNA. A strawberry plant does this by sending out <b>runners</b> (long stems that grow into new plants).',
+      keyFact: 'Asexual reproduction makes genetically identical offspring from one parent, and mitosis is used for it in some organisms.',
     },
     {
       title: 'Before vs after the split',
@@ -99,7 +99,7 @@ registerSection({
           { feature: 'Genetic information', left: 'One full set', right: 'Identical copy in each cell' },
         ],
       },
-      text: 'After mitosis there are <b>two cells</b>, but each one has the <b>same number of chromosomes</b> as the parent cell. The daughter cells are <b>genetically identical</b> to the parent and to each other, because the DNA was copied before it was shared out.',
+      text: 'After mitosis there are <b>two cells</b>, but each one has the <b>same number of chromosomes</b> as the original (parent) cell. The daughter cells are <b>genetically identical</b> (they have exactly the same DNA) to the parent and to each other, because the DNA was copied before it was shared out.',
       keyFact: 'The two daughter cells produced by mitosis have the same number of chromosomes as the parent cell and are genetically identical to it.',
     },
   ],
@@ -107,13 +107,13 @@ registerSection({
     {
       q: 'What is the cell cycle?',
       a: 'The series of stages a cell goes through to divide into two cells',
-      options: ['A cell passing its genes to the next generation of cells', 'A cell losing its nucleus before it divides', 'A cell moving across a membrane by diffusion'],
+      options: ['A cell passing its genes to the next generation of cells', 'A cell losing its nucleus before it divides', 'A cell releasing energy from glucose in its mitochondria'],
       why: 'Think of it as a full season: every stage has to happen in order before the next match kicks off.',
     },
     {
       q: 'What are the three stages of the cell cycle, in order?',
       a: 'Growth and DNA copying, then mitosis, then splitting of the cytoplasm and membranes',
-      options: ['Mitosis, then growth, then DNA copying', 'Splitting of membranes, then growth, then mitosis', 'Diffusion, then osmosis, then active transport'],
+      options: ['Mitosis, then growth, then DNA copying', 'Splitting of membranes, then growth, then mitosis', 'Ribosomes, then mitochondria, then cell wall'],
       why: 'The team warms up and copies its kit first, then plays the match, and then splits into two squads.',
     },
     {
@@ -131,8 +131,8 @@ registerSection({
     {
       q: 'What process copies the DNA before mitosis?',
       a: 'DNA replication, which makes two copies of each chromosome',
-      options: ['Osmosis, which moves water into the nucleus', 'Diffusion, which spreads the chromosomes out', 'Respiration, which releases energy from the DNA'],
-      why: 'Replicating means making a perfect copy, like a photocopier turning one kit into two identical kits.',
+      options: ['Respiration, which releases energy in the mitochondria', 'Photosynthesis, which makes glucose in the chloroplasts', 'Protein synthesis, which builds proteins on the ribosomes'],
+      why: 'Replicating means making an exact copy, like a photocopier turning one kit into two identical kits.',
       accept: ['replicat'],
     },
     {
@@ -175,21 +175,21 @@ registerSection({
     {
       q: 'Mitosis is used in which type of reproduction that makes genetically identical offspring?',
       a: 'Asexual reproduction',
-      options: ['Sexual reproduction', 'Pollination by bees', 'Digesting food in the gut'],
+      options: ['Sexual reproduction', 'Photosynthesis in the leaves', 'Digesting food in the gut'],
       why: 'No second parent means no mixing of genes, so the offspring are copies of the parent.',
       accept: ['asexual'],
     },
     {
       q: 'A scab forms and skin cells divide to replace the damaged ones. Which process is mainly happening?',
       a: 'Mitosis',
-      options: ['Osmosis', 'Diffusion', 'Active transport'],
+      options: ['Photosynthesis', 'Fertilisation', 'Digestion'],
       why: 'New skin cells come from splitting identical cells, which is exactly what mitosis does.',
       accept: ['mitosis'],
     },
     {
       q: 'A child grows taller as more and more cells are made in their bones. Which process is making the new cells?',
       a: 'Mitosis',
-      options: ['Diffusion', 'Osmosis', 'Active transport'],
+      options: ['Photosynthesis', 'Respiration', 'Digestion'],
       why: 'Growing taller needs more cells, and mitosis is the cell copy machine that makes them.',
       accept: ['mitosis'],
     },

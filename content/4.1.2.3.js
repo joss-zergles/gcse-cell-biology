@@ -4,7 +4,7 @@ registerSection({
   topic: 'Cell division',
   emoji: '🌱',
   biologyOnly: false,
-  intro: 'Stem cells are the academy kids of the body: undifferentiated, unpicked, and able to be trained into almost any position. Scouts are hunting for them in embryos, bone marrow and plant tips, so pay attention, because the transfer window is wide open.',
+  intro: 'Stem cells are the academy kids of the body: not yet picked for a position, but able to be trained into almost any one. Scouts are hunting for them in early embryos, adults and plant growing tips, so pay attention, because the transfer window is wide open.',
   scenes: [
     {
       title: 'The academy kid',
@@ -18,8 +18,8 @@ registerSection({
           { emoji: '🩸', label: 'Blood cell', note: 'Red and white blood cells' },
         ],
       },
-      text: 'A <b>stem cell</b> is an <b>undifferentiated</b> cell that can divide to make many more cells of the same type. It can also <b>differentiate</b> into other, specialised cell types, such as nerve, muscle and blood cells.',
-      keyFact: 'A stem cell is an undifferentiated cell that can divide to make many more cells of the same type, and can differentiate into other cell types.',
+      text: 'A <b>stem cell</b> is an <b>undifferentiated</b> cell. Undifferentiated means it has not yet become specialised, so it has not "picked a job" yet. A stem cell can divide to make many more cells, and it can <b>differentiate</b> (become specialised) into cell types such as nerve, muscle and blood cells.',
+      keyFact: 'A stem cell is an undifferentiated cell that can divide to make many more cells, and can differentiate into other, specialised cell types.',
     },
     {
       title: 'Embryonic versus adult: two academies',
@@ -29,14 +29,28 @@ registerSection({
         left: { name: 'Embryonic stem cells', emoji: '👶' },
         right: { name: 'Adult bone marrow stem cells', emoji: '🦴' },
         rows: [
-          { feature: 'Found in', left: 'Human embryos', right: 'Adult bone marrow' },
+          { feature: 'Found in', left: 'Very early embryos', right: 'Adults, in bone marrow' },
           { feature: 'Can form', left: 'Most types of human cell', right: 'Many types, including blood cells' },
           { feature: 'Main job', left: 'Build the body of a developing embryo', right: 'Repair and replace cells' },
-          { feature: 'Ethical or religious objections', left: true, right: false },
         ],
       },
-      text: 'Embryonic stem cells come from human embryos and can differentiate into <b>most types</b> of human cell. Adult stem cells, such as those in <b>bone marrow</b>, can form many types of cells, including <b>blood cells</b>, but the range is more limited.',
+      text: '<b>Embryonic stem cells</b> come from very early embryos and can differentiate into <b>most types</b> of human cell. <b>Adult stem cells</b> are found in adults, for example in <b>bone marrow</b>: the soft tissue inside some bones, where blood cells are made. Adult stem cells can form many types of cell, including blood cells, but the range is more limited.',
       keyFact: 'Embryonic stem cells can differentiate into most types of human cell, whereas adult stem cells from bone marrow can form many types of cell, including blood cells.',
+    },
+    {
+      title: 'Clones: the identical twins of cells',
+      commentator: '"Two players with exactly the same boots, shirts and skills. Perfect for a squad of copies!"',
+      type: 'commentary',
+      params: {
+        emoji: ['🧬', '👯', '🔁'],
+        lines: [
+          'A clone is an organism or cell that is genetically identical to another: it has exactly the same genes.',
+          'Cloning means making clones.',
+          'Mitosis makes cell clones: the two new cells are genetically identical to the original.',
+        ],
+      },
+      text: 'A <b>clone</b> is an organism or cell that is <b>genetically identical</b> to another, meaning it has exactly the same genes. <b>Cloning</b> means making clones. Mitosis makes cell clones, which is why the two new cells are genetically identical to the original.',
+      keyFact: 'A clone is an organism or cell that is genetically identical to another, and cloning means making clones.',
     },
     {
       title: 'Therapeutic cloning: the copy-cat plan',
@@ -51,24 +65,39 @@ registerSection({
           { emoji: '🧪', label: 'Stem cells taken', note: 'From the embryo, for treatment' },
         ],
       },
-      text: 'In <b>therapeutic cloning</b> an embryo is produced with the <b>same genes</b> as the patient. Stem cells from that embryo are <b>not rejected</b> by the patient\'s body, so they can be used for medical treatment.',
-      keyFact: 'In therapeutic cloning, an embryo is produced with the same genes as the patient, so stem cells from it are not rejected by the patient\'s body.',
+      text: '<b>Therapeutic cloning</b> means making an embryo with the same genes as the patient, so its stem cells can be used to treat illness. The body\'s <b>immune system</b> is its defence system against germs. It attacks cells it recognises as <b>foreign</b> (not part of the body), and this attack is called <b>rejection</b>. Cells with the patient\'s own genes are recognised as "home players", so they are not attacked and are not rejected.',
+      keyFact: 'In therapeutic cloning, an embryo is produced with the same genes as the patient, so its stem cells are not recognised as foreign by the immune system and are not rejected.',
     },
     {
-      title: 'Benefits, risks and the big debate',
-      commentator: '"The referee has to weigh up everything here, from the medical wins to the ethical arguments on the terraces!"',
+      title: 'Diabetes and paralysis: the injured stars',
+      commentator: '"Two big injury problems on the treatment table! Can the stem cell medics get these players back on the pitch?"',
       type: 'commentary',
       params: {
-        emoji: ['💊', '🦠', '🙏', '⚖️'],
+        emoji: ['🍬', '🦽', '🌟'],
         lines: [
-          'Benefit: stem cell treatments may help conditions such as diabetes and paralysis.',
-          'Risk: stem cell treatments can transfer viral infection to the patient.',
-          'Debate: some people have ethical or religious objections to stem cell use.',
-          'Verdict: the benefits, practical risks and ethical issues all need weighing up.',
+          'Diabetes: the body cannot control the level of sugar (glucose) in the blood properly.',
+          'Paralysis: being unable to move part of the body, often because nerves are damaged.',
+          'Stem cells might help by replacing damaged cells, though this is still being researched.',
         ],
       },
-      text: 'Stem cell treatments may help conditions such as <b>diabetes</b> and <b>paralysis</b>. The risks include the <b>transfer of viral infection</b>, and some people have <b>ethical or religious objections</b>. Scientists and society must weigh up all of these before deciding.',
-      keyFact: 'Stem cell treatments may help conditions such as diabetes and paralysis, but risks include transfer of viral infection, and some people have ethical or religious objections.',
+      text: '<b>Diabetes</b> is a condition where the body cannot control the level of <b>glucose</b> (sugar) in the blood properly. <b>Paralysis</b> means being unable to move part of the body, often because <b>nerves</b> are damaged. Stem cells might help by <b>replacing damaged cells</b>, which could help treat conditions such as these.',
+      keyFact: 'Diabetes is a condition where the body cannot control blood glucose levels, and paralysis is being unable to move part of the body, often because nerves are damaged.',
+    },
+    {
+      title: 'Risks and the big debate',
+      commentator: '"The referee has to weigh up everything here, from the medical wins to the arguments on the terraces!"',
+      type: 'commentary',
+      params: {
+        emoji: ['🦠', '⚖️', '🙏', '🏁'],
+        lines: [
+          'Risk: stem cells grown in a lab could carry a virus, a tiny germ that infects cells, and pass it to the patient.',
+          'Ethical means to do with whether something is right or wrong.',
+          'Objection: embryos are destroyed to collect stem cells, and some people believe an embryo has a right to life. Some religious people object too.',
+          'Verdict: the medical benefits, the risks and the ethics all need weighing up.',
+        ],
+      },
+      text: 'Stem cells grown in a lab could carry a <b>virus</b> (a tiny germ that infects cells), which could cause a <b>viral infection</b> in the patient. <b>Ethical</b> means to do with whether something is right or wrong. Some people object because <b>embryos</b> are destroyed to collect the stem cells, and they believe an embryo has a right to life. Some people also have <b>religious objections</b>, based on their beliefs.',
+      keyFact: 'Risks of stem cell treatment include transfer of viral infection, and some people have ethical or religious objections because embryos are destroyed to collect stem cells.',
     },
     {
       title: 'Meristems: the academy that never closes',
@@ -82,8 +111,8 @@ registerSection({
           { emoji: '🌸', label: 'Flower cell', note: 'Helps the plant reproduce' },
         ],
       },
-      text: 'Plants have <b>meristem tissue</b> at the tips of their roots and shoots. Meristem cells can differentiate into <b>any type of plant cell</b>, and they keep doing so throughout the life of the plant.',
-      keyFact: 'Meristem tissue in plants can differentiate into any type of plant cell, throughout the life of the plant, and is found at the tips of roots and shoots.',
+      text: 'A <b>meristem</b> is a tissue at the tips of plant roots and shoots (the growing stems above the ground), where cells keep dividing. Meristem cells can differentiate into <b>any type of plant cell</b>, and they keep doing so throughout the life of the plant.',
+      keyFact: 'Meristem tissue, found at the tips of roots and shoots, can differentiate into any type of plant cell throughout the life of the plant.',
     },
     {
       title: 'Cloning plants from meristems',
@@ -92,20 +121,30 @@ registerSection({
       params: {
         steps: [
           { emoji: '🌿', label: 'Meristem tissue', note: 'Taken from the tip of a plant' },
-          { emoji: '🧪', label: 'Grown in lab', note: 'Nutrients, sterile conditions' },
+          { emoji: '🧪', label: 'Grown in lab', note: 'Given nutrients, in germ-free conditions' },
           { emoji: '🌱', label: 'New plants form', note: 'Cells differentiate into plant tissue' },
           { emoji: '🌾', label: 'Identical clones', note: 'Genetically identical to the parent' },
           { emoji: '🚜', label: 'Protect and farm', note: 'Rare species saved, resistant crops multiplied' },
         ],
       },
-      text: 'Stem cells from <b>meristems</b> can be used to produce <b>clones</b> of plants <b>quickly and economically</b>. Rare species can be cloned to protect them from extinction, and crop plants with useful features, such as <b>disease resistance</b>, can be cloned to give farmers large numbers of identical plants.',
-      keyFact: 'Meristem stem cells can be used to produce clones of plants quickly and economically, protecting rare species from extinction and giving farmers large numbers of identical, disease-resistant plants.',
+      text: 'Stem cells from <b>meristems</b> can be used to produce <b>clones</b> of plants <b>quickly and cheaply</b>. Clones can protect <b>rare species</b> (plants with very few members left) from <b>extinction</b> (dying out completely). Crop plants with useful features, such as <b>disease resistance</b> (the ability to fight off disease), can also be cloned to give farmers large numbers of identical plants.',
+      keyFact: 'Meristem stem cells can be used to produce clones of plants quickly and cheaply, protecting rare species from extinction and giving farmers large numbers of identical, disease-resistant plants.',
     },
   ],
-  cards: [
+  cards:  [
+    {
+      q: 'What does "undifferentiated" mean?',
+      a: 'Not yet specialised for a particular job',
+      options: [
+        'Already specialised for one particular job',
+        'Found only in the roots of a plant',
+        'Unable to divide to make new cells',
+      ],
+      why: 'Like an academy kid who has not yet been picked for a position.',
+    },
     {
       q: 'What is a stem cell?',
-      a: 'An undifferentiated cell that can divide and differentiate into other cell types',
+      a: 'An undifferentiated cell that can divide and differentiate into other types of cell',
       options: [
         'A cell that has already become specialised for one job',
         'A cell found only in the roots of a plant',
@@ -117,35 +156,118 @@ registerSection({
       q: 'What is the name of the process where a stem cell becomes a specialised cell?',
       a: 'Differentiation',
       accept: ['differentiation'],
-      options: ['Diffusion', 'Osmosis', 'Mitosis'],
+      options: ['Fertilisation', 'Respiration', 'Mitosis'],
       why: 'It is like an academy kid finally being trained up and picked for a specific position.',
     },
     {
-      q: 'What is the main job of stem cells in an embryo?',
-      a: 'To differentiate and form all the different tissues of the developing body',
+      q: 'What is bone marrow?',
+      a: 'The soft tissue inside some bones, where blood cells are made',
       options: [
-        'To store energy as fat for later use',
-        'To carry oxygen around the body in the blood',
-        'To stop cells from ever dividing again',
+        'The hard outer layer of a bone',
+        'The tough tissue that joins muscles to bones',
+        'A thin layer of skin that covers the bones',
       ],
-      why: 'Embryonic stem cells are the under-9s who could become anything: the whole squad is still open.',
+      why: 'The academy\'s training ground, tucked away inside the bones.',
     },
     {
-      q: 'What is the main job of stem cells in adult animals?',
-      a: 'To repair and replace damaged or worn-out cells',
-      options: [
-        'To pump blood around the body',
-        'To produce seeds for reproduction',
-        'To make new cells for a new embryo only',
-      ],
-      why: 'Adult stem cells are the reserve team, ready to step in when a first-team player gets injured.',
+      q: 'Which type of stem cell comes from very early embryos and can form most types of human cell?',
+      a: 'Embryonic stem cells',
+      accept: ['embryonic'],
+      options: ['Adult stem cells', 'Meristem cells', 'Red blood cells'],
+      why: 'The under-9s who could become almost anything: the most versatile players in the academy.',
     },
     {
-      q: 'Adult bone marrow stem cells can form many types of cell. Name one of them.',
-      a: 'Blood cells',
-      accept: ['blood'],
-      options: ['Root hair cells', 'Guard cells', 'Palisade cells'],
-      why: 'Bone marrow is a reserve team that covers a few key positions, and blood cells are the big one.',
+      q: 'What is a clone?',
+      a: 'An organism or cell that is genetically identical to another',
+      options: [
+        'An organism with a different set of genes from its parent',
+        'A cell that has become specialised for one job',
+        'A cell with only half the chromosomes of its parent',
+      ],
+      why: 'A clone is a perfect copy of the original player, right down to the genes.',
+    },
+    {
+      q: 'What is therapeutic cloning?',
+      a: 'Making an embryo with the patient\'s own genes, so its stem cells can be used to treat illness',
+      options: [
+        'Making an embryo with completely different genes to the patient',
+        'Cutting out damaged cells with a laser',
+        'Removing all the blood from a patient\'s body',
+      ],
+      why: 'It is a copy of the patient\'s own genes: a bit like signing a player who already fits the team\'s kit.',
+    },
+    {
+      q: 'What is rejection?',
+      a: 'The immune system attacking cells it recognises as foreign',
+      options: [
+        'The body growing extra cells it does not need',
+        'Stem cells turning into plant cells',
+        'Cells dividing too slowly to repair the body',
+      ],
+      why: 'The defence tackles a player who is not part of the team.',
+    },
+    {
+      q: 'Why are stem cells from a therapeutic clone not rejected by the patient\'s body?',
+      a: 'They have the patient\'s own genes, so the immune system does not attack them',
+      options: [
+        'They are coated in a special protective wax',
+        'They are made from plant meristem cells',
+        'They are much bigger than the patient\'s own cells',
+      ],
+      why: 'Same shirt as the home side, so the defence lets them straight through.',
+    },
+    {
+      q: 'Which condition is when the body cannot control the level of glucose (sugar) in the blood properly?',
+      a: 'Diabetes',
+      accept: ['diabetes'],
+      options: [
+        'A condition where the body makes too many red blood cells',
+        'A condition caused by damaged nerves in the legs',
+        'A condition where the body cannot see clearly',
+      ],
+      why: 'Like a midfield that cannot control possession, the blood sugar runs out of control.',
+    },
+    {
+      q: 'Which condition means being unable to move part of the body, often because nerves are damaged?',
+      a: 'Paralysis',
+      accept: ['paralysis'],
+      options: [
+        'Having too much sugar in the blood',
+        'Having too many red blood cells',
+        'Being unable to hear clearly',
+      ],
+      why: 'The signals from the manager cannot reach the legs, so the player cannot move.',
+    },
+    {
+      q: 'Give one risk of using stem cells grown in a lab for treatment.',
+      a: 'They could carry a virus that infects the patient',
+      accept: ['viral', 'virus'],
+      options: [
+        'Patients develop perfect eyesight',
+        'The stem cells turn into plant cells',
+        'The patient grows taller than normal',
+      ],
+      why: 'A virus is a dodgy tackle that can sneak into the team and spread.',
+    },
+    {
+      q: 'What does "ethical" mean?',
+      a: 'To do with whether something is right or wrong',
+      options: [
+        'To do with how fast a cell divides',
+        'To do with how much a cell weighs',
+        'To do with which plants grow in a field',
+      ],
+      why: 'The referee has to decide what is right and fair, not just what is possible.',
+    },
+    {
+      q: 'Why do some people object to using embryonic stem cells?',
+      a: 'Embryos are destroyed to collect the stem cells, and they believe an embryo has a right to life',
+      options: [
+        'They think stem cells make people taller',
+        'They say stem cells are only found in plants',
+        'They believe stem cells cannot divide',
+      ],
+      why: 'It is a big debate on the terraces, and ethical and religious views are part of it.',
     },
     {
       q: 'Where in a plant are meristems found?',
@@ -158,66 +280,15 @@ registerSection({
       why: 'Meristems are the plant\'s academy, sitting at the growing tips.',
     },
     {
-      q: 'Why can meristem tissue make any type of plant cell for the whole life of the plant?',
-      a: 'Its cells keep dividing and can differentiate into any type of plant cell',
-      options: [
-        'Its cells only divide during the first year of growth',
-        'Its cells turn into one type of leaf cell and then stop',
-        'Its cells are only found in dead plant tissue',
-      ],
-      why: 'The plant academy never closes, so new players keep coming through.',
+      q: 'What is the name of the plant tissue at the tips of roots and shoots that keeps dividing and can become any plant cell?',
+      a: 'Meristem',
+      accept: ['meristem'],
+      options: ['Xylem', 'Phloem', 'Root hair'],
+      why: 'The academy at the tip of every root and shoot.',
     },
     {
-      q: 'What is therapeutic cloning?',
-      a: 'Making an embryo with the patient\'s genes, to make stem cells for treatment',
-      options: [
-        'Making an embryo with completely different genes to the patient',
-        'Cutting out damaged cells with a laser',
-        'Removing all the blood from a patient\'s body',
-      ],
-      why: 'It is a copy of the patient\'s own genes: a bit like signing a player who already fits the team\'s kit.',
-    },
-    {
-      q: 'Why are stem cells from a therapeutic clone not rejected by the patient\'s body?',
-      a: 'They have the patient\'s genes, so the body does not treat them as foreign',
-      options: [
-        'They are coated in a special protective wax',
-        'They are made from plant meristem cells',
-        'They are much bigger than the patient\'s own cells',
-      ],
-      why: 'Same shirt as the home side, so the defence lets them straight through.',
-    },
-    {
-      q: 'Name one condition that stem cell treatment may help.',
-      a: 'Diabetes or paralysis',
-      accept: ['diabetes', 'paralysis'],
-      options: ['Tooth decay', 'Acne', 'Hay fever'],
-      why: 'Stem cells could be the replacement players that get a whole injured team back on the pitch.',
-    },
-    {
-      q: 'Give one risk of using stem cell treatments.',
-      a: 'Transfer of viral infection',
-      accept: ['viral', 'virus'],
-      options: [
-        'Patients develop perfect eyesight',
-        'The stem cells turn into plant cells',
-        'The patient grows taller than normal',
-      ],
-      why: 'A virus is a dodgy tackle that can sneak into the team and spread.',
-    },
-    {
-      q: 'Why do some people object to using stem cells in medicine?',
-      a: 'They have ethical or religious objections',
-      options: [
-        'They think stem cells make people taller',
-        'They say stem cells are only found in plants',
-        'They believe stem cells cannot divide',
-      ],
-      why: 'Ethical and religious views are part of the big debate that doctors and society must weigh up.',
-    },
-    {
-      q: 'Why is cloning plants from meristems described as quick and economical?',
-      a: 'It produces large numbers of identical plants cheaply and fast',
+      q: 'Why can cloning plants from meristems be useful to farmers?',
+      a: 'It produces large numbers of identical plants quickly and cheaply',
       options: [
         'It takes many years and costs a fortune for each plant',
         'It only produces one plant at a time',
@@ -226,48 +297,49 @@ registerSection({
       why: 'It is like building a whole squad of identical players from one academy star in no time.',
     },
     {
-      q: 'How can cloning meristems help rare plant species?',
-      a: 'It produces identical copies to protect the species from extinction',
+      q: 'What is the main job of stem cells in adult animals?',
+      a: 'To repair and replace damaged or worn-out cells',
+      accept: ['repair'],
       options: [
-        'It makes the rare plants disappear even faster',
-        'It makes the plants produce different genes each time',
-        'It stops the plants from ever flowering',
+        'To pump blood around the body',
+        'To produce seeds for reproduction',
+        'To make new cells for a new embryo only',
       ],
-      why: 'If only a few are left, cloning builds the squad back up before it is too late.',
+      why: 'Adult stem cells are the reserve team, ready to step in when a first-team player gets injured.',
     },
     {
-      q: 'Why would a farmer want clones of a disease-resistant crop plant?',
-      a: 'To grow large numbers of identical, disease-resistant plants',
-      options: [
-        'To make the crop grow in the sea',
-        'To stop the plants producing any fruit',
-        'To make every plant different from its parent',
+      "q": "What is the job of stem cells in an embryo?",
+      "a": "To divide and differentiate into all the different cells the body needs",
+      "options": [
+        "To repair a cut in the skin",
+        "To carry oxygen around the body",
+        "To make the cell walls of plant cells"
       ],
-      why: 'One brilliant keeper, copied into a whole team of brilliant keepers.',
+      "why": "Embryonic stem cells are the under-9s: they become every position the body needs as it develops."
     },
     {
-      q: 'What is the name of the plant tissue that keeps dividing and can make any plant cell?',
-      a: 'Meristem',
-      accept: ['meristem'],
-      options: ['Xylem', 'Phloem', 'Palisade mesophyll'],
-      why: 'The academy at the tip of every root and shoot.',
-    },
-    {
-      q: 'Which type of human stem cell comes from early embryos and can form most types of human cell?',
-      a: 'Embryonic stem cells',
-      accept: ['embryonic'],
-      options: ['Adult stem cells', 'Meristem cells', 'Blood stem cells'],
-      why: 'The under-9s who could become anything: the most versatile players in the academy.',
-    },
-    {
-      q: 'Explain why therapeutic cloning could help a patient with diabetes.',
-      a: 'Stem cells with the patient\'s genes are not rejected, so can be used',
-      options: [
-        'Stem cells from the embryo are always rejected by the body',
-        'Diabetes can only be cured by planting seeds',
-        'Therapeutic cloning removes all of the patient\'s stem cells',
+      "q": "Name one condition that stem cell treatment may be able to help.",
+      "a": "Diabetes or paralysis",
+      "options": [
+        "A broken fingernail",
+        "Short-sightedness from screens",
+        "A common cold"
       ],
-      why: 'A copied set of genes means the body accepts the new signing, so the treatment can actually work.',
+      "accept": [
+        "diabetes",
+        "paralysis"
+      ],
+      "why": "Stem cells could replace the damaged cells, such as nerve cells in paralysis."
+    },
+    {
+      "q": "How can cloning plants from meristems help a rare plant species?",
+      "a": "It makes lots of identical copies, protecting the species from extinction",
+      "options": [
+        "It makes the plants grow in the sea",
+        "It changes all the plants into a new species",
+        "It stops the plants from ever flowering"
+      ],
+      "why": "More copies of a rare plant means it is much less likely to die out completely."
     },
   ],
 });

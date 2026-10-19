@@ -4,7 +4,7 @@ const dir = path.join(__dirname, '..', 'content');
 const TYPES = ['squad','versus','flow','split','cycle','ladder','triangle','branch','chain','growth','cubes','commentary'];
 let problems = 0;
 const bad = (id, msg) => { problems++; console.log(`  ✗ ${id}: ${msg}`); };
-for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.js')).sort()) {
+for (const f of fs.readdirSync(dir).filter((f) => /^\d.*\.js$/.test(f)).sort()) {
   let s;
   global.registerSection = (x) => { s = x; };
   try { require(path.join(dir, f)); } catch (e) { bad(f, 'does not load: ' + e.message); continue; }
@@ -34,3 +34,25 @@ for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.js')).sort()) {
   });
 }
 console.log(problems ? `\n${problems} problem(s)` : '\nAll content OK');
+
+// Explain-before-use check: flag glossary words that appear in a section BEFORE the section that teaches them.
+const gPath = path.join(dir, 'glossary.js');
+if (fs.existsSync(gPath)) {
+  let G = [];
+  global.registerGlossary = (g) => { G = g; };
+  require(gPath);
+  const order = fs.readdirSync(dir).filter((f) => /^\d/.test(f)).map((f) => f.replace('.js', '')).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  const rank = (id) => order.indexOf(id);
+  console.log(`\nGlossary: ${G.length} terms`);
+  const early = [];
+  for (const id of order) {
+    let s; global.registerSection = (x) => { s = x; }; delete require.cache[require.resolve(path.join(dir, id + '.js'))]; require(path.join(dir, id + '.js'));
+    const text = JSON.stringify([s.intro, s.scenes, s.cards]).toLowerCase();
+    for (const g of G) {
+      if (rank(g.section) <= rank(id)) continue;
+      const hit = [g.term].concat(g.forms || []).find((f) => new RegExp(`(?<![\\w-])${f.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`).test(text));
+      if (hit) early.push(`${id} uses "${hit}" (taught in ${g.section})`);
+    }
+  }
+  console.log(early.length ? `Words used before the section that teaches them (check each is explained where used):\n  ${early.join('\n  ')}` : 'No words used before they are taught');
+}
